@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://doso4hrh01chk"]
+
+[ext_resource type="Texture2D" uid="uid://by0dpehtjhc4f" path="res://resource/player/health_bar.png" id="1_fhbqq"]
+[ext_resource type="Script" path="res://scenes/ui/hud/health_bar.gd" id="2_kxwu2"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7mx1h"]
+
+[node name="HealthBar" type="TextureProgressBar"]
+value = 50.0
+fill_mode = 6
+texture_under = SubResource("CompressedTexture2D_7mx1h")
+texture_progress = ExtResource("1_fhbqq")
+script = ExtResource("2_kxwu2")

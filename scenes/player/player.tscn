@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://o8hpxmhcss7m"]
+[gd_scene load_steps=8 format=3 uid="uid://o8hpxmhcss7m"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_fx8g5"]
 [ext_resource type="Texture2D" uid="uid://ctob5sq1c05bo" path="res://resource/player/playerGrey_walk1.png" id="1_r3v2o"]
 [ext_resource type="Shape2D" uid="uid://bbymik5wl8fdm" path="res://scenes/player/player-shape.tres" id="2_f6gb7"]
 [ext_resource type="Texture2D" uid="uid://balemcxfdpxn3" path="res://resource/player/playerGrey_walk2.png" id="2_m56i7"]
+[ext_resource type="PackedScene" uid="uid://c7ho68p0rqxul" path="res://scenes/utils/entity_health.tscn" id="5_jfhqk"]
+[ext_resource type="PackedScene" uid="uid://doso4hrh01chk" path="res://scenes/ui/hud/HealthBar.tscn" id="6_mp63m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ffi2t"]
 animations = [{
@@ -25,18 +27,31 @@ collision_mask = 29
 motion_mode = 1
 script = ExtResource("1_fx8g5")
 
+[node name="Parameters" type="Node" parent="."]
+
+[node name="Health" parent="Parameters" instance=ExtResource("5_jfhqk")]
+
+[node name="HealthBar" parent="Parameters/Health" node_paths=PackedStringArray("health") instance=ExtResource("6_mp63m")]
+value = 100.0
+health = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="Speed-todo" type="Node" parent="Parameters"]
+
+[node name="Experience-todo" type="Node" parent="Parameters"]
+
 [node name="AttackTimer" type="Timer" parent="."]
 
-[node name="Overlap" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 61
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Overlap"]
+[node name="HurtBox-Intersect" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("2_f6gb7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ffi2t")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="HurtBox" type="CollisionShape2D" parent="."]
 shape = ExtResource("2_f6gb7")
