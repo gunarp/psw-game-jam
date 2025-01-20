@@ -3,7 +3,7 @@
 title: High Level Class Diagram
 ---
 classDiagram
-  class Map {
+  class Camera {
   }
 
   class Player {
@@ -74,10 +74,10 @@ classDiagram
   }
 
   %% Relationships
-  Map "1" o-- "1" Player
-  Map "1" o-- "N" Projectile
-  Map "1" o-- "N" Enemy
-  Map "1" o-- "N" Pickup
+  Camera "1" o-- "1" Player
+  Camera "1" o-- "N" Projectile
+  Camera "1" o-- "N" Enemy
+  Camera "1" o-- "N" Pickup
   Player "1" o-- "N" Equipment
   Weapon ..> Projectile : Creates
   Enemy ..> Projectile : Creates

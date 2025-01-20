@@ -1,3 +1,0 @@
-[gd_scene format=3 uid="uid://blagiaxomx5gf"]
-
-[node name="EnemyBase" type="CollisionShape2D"]
