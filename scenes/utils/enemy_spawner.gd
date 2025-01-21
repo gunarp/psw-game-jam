@@ -24,12 +24,6 @@ func _on_spawn_timer_timeout() -> void:
 	var newEnemy = mob_to_spawn.instantiate() as EnemyEntity
 	newEnemy.custom_set_scale(mob_scale)
 	newEnemy.position = _get_random_spawn_position()
-
-	# TODO: Implement movement strategy
-	
-	
-	#mob.linear_velocity = speed.rotated(direction.angle())
-
 	add_sibling(newEnemy)
 	pass
 

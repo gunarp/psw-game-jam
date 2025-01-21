@@ -3,7 +3,9 @@ extends RigidBody2D
 class_name EnemyEntity
 
 @onready var player : PlayerEntity = get_tree().get_first_node_in_group("player")
-var damagePerSecond : int = 100
+
+# TODO: Refactor into specialized damage class
+var damagePerSecond : int = 10
 
 func custom_set_scale(sc: Vector2) -> void:
 	self.apply_scale(sc)
@@ -21,10 +23,13 @@ func _physics_process(delta: float) -> void:
 	self.linear_velocity = $Parameters/EntitySpeed.get_velocity(direction) 
 	#move_and_slide()
 	#newEnemy.linear_velocity = speed.rotated(direction.angle())
+	
+func hit(damage: float) -> void:
+	$Parameters/EntityHealth.on_damaged(damage)
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 
 
 func _on_entity_health_entity_health_depleted() -> void:
-	print("Enemy died!")
+	queue_free()

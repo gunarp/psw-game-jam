@@ -12,6 +12,7 @@ var speed: int = 100
 
 func _ready():
 	_init_damage_subsystem()
+	_init_attack_subsystem()
  	# TODO: Implement other subsystems - experience, attack, speed
 	
 
@@ -83,4 +84,21 @@ func _on_health_entity_health_depleted() -> void:
 		$Parameters/Health.health = $Parameters/Health.max_health
 	else:
 		emit_signal("player_died")
+#endregion
+
+#region Attack Subsystem -- refactorout later
+# var list of weapons
+#@onready var default_weapon = preload("res://scenes/equipment/weapons/needle/needle.tscn")
+#var weapons : Array[Weapon] = []
+
+func _init_attack_subsystem():
+	print("intiialize attack subsystem")
+	var starting_weapon = load("res://scenes/equipment/weapons/Weapon.tscn").instantiate() as Weapon
+	add_child(starting_weapon)
+	starting_weapon.initialize(self, load("res://scenes/equipment/weapons/needle/NeedleProjectile.tscn"))
+	#add_child(weapon_template.instantiate())
+	#weapons.push_back(weapon_template.instantiate())
+	#for w: Weapon in weapons:
+		#w.initialize(self, load("res://scenes/equipment/weapons/needle/NeedleProjectile.tscn"))
+	#print("initilizaiton subroutie complete")
 #endregion

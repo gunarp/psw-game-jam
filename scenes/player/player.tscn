@@ -24,7 +24,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 29
+collision_mask = 25
 motion_mode = 1
 script = ExtResource("1_fx8g5")
 
@@ -36,8 +36,6 @@ script = ExtResource("1_fx8g5")
 
 [node name="EntitySpeed" parent="Parameters" instance=ExtResource("3_3ugq2")]
 
-[node name="AttackTimer" type="Timer" parent="."]
-
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 61
@@ -46,18 +44,20 @@ collision_mask = 61
 shape = ExtResource("2_f6gb7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ffi2t")
 
 [node name="CollideBox" type="CollisionShape2D" parent="."]
 shape = ExtResource("2_f6gb7")
 
 [node name="PlayerHudElements" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="HealthBar" parent="PlayerHudElements" node_paths=PackedStringArray("entity_health") instance=ExtResource("6_mp63m")]
 entity_health = NodePath("../../Parameters/Health")
 
 [node name="DamageTimer" type="Timer" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
 
 [connection signal="entity_health_depleted" from="Parameters/Health" to="." method="_on_health_entity_health_depleted"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_area_2d_body_entered"]
