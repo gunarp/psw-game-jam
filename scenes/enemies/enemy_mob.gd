@@ -1,12 +1,14 @@
 extends RigidBody2D
 
-func custom_apply_scale(scale_mod: Vector2) -> void:
-	self.apply_scale(scale_mod)
-	$AnimatedSprite2D.apply_scale(scale_mod)
-	$CollisionShape2D.apply_scale(scale_mod)
+class_name EnemyEntity
+
+func custom_set_scale(sc: Vector2) -> void:
+	self.apply_scale(sc)
+	$AnimatedSprite2D.apply_scale(sc)
+	$CollisionShape2D.apply_scale(sc)
 
 func _ready() -> void:
-	$AnimatedSprite2D.play()
+	pass
 
 func _physics_process(delta: float) -> void:
 	pass

@@ -1,14 +1,17 @@
 extends CharacterBody2D
 
+class_name PlayerEntity
+
 # TODO: make speed change with items
-var speed: int = 500
+var speed: int = 100
 
 # !! This only works with the capsule shape currently used as a placeholder !!
-@onready var health_bar_offset: Vector2 = Vector2($Parameters/Health/HealthBar.max_value / 2, $HurtBox.shape.height / 2) + Vector2(0, 5)
+@onready var health_bar_offset: Vector2 = -1 * (Vector2($PlayerHudElements/HealthBar.max_value / 2, $HurtBox.shape.height / 2) + Vector2(0, 10))
 
 func _ready():
 	# Initialize Parameters
 	$Parameters/Health.health = 100
+	$PlayerHudElements/HealthBar.set_position(health_bar_offset)
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
@@ -21,7 +24,10 @@ func _process(_delta: float) -> void:
 	
 	# TODO: use direction for aiming reticle rendering / functionality
 	_render_character(direction)
-	pass
+
+	# HealthBar and other PlayerHudElements should probably be decoupled from player
+	# Don't want to think about that now though, so this will do
+	$PlayerHudElements.global_rotation = 0
 
 #region Rendering helpers
 func _render_character(direction: Vector2):
@@ -30,8 +36,6 @@ func _render_character(direction: Vector2):
 	else:
 		$AnimatedSprite2D.stop()
 	#$AnimatedSprite2D.flip_h = direction.x < 0
-	
-	$Parameters/Health/HealthBar.set_position(position - health_bar_offset)
 #endregion
 
 #region Input Helpers

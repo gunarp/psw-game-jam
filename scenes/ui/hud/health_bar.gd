@@ -1,9 +1,11 @@
 extends TextureProgressBar
 
-@export var health: EntityHealth
+@export var entity_health: EntityHealth
 
 func _ready() -> void:
-	value = health.health
+	value = entity_health.health
 
 func _process(delta: float) -> void:
-	value = health.health
+	value = entity_health.health
+	
+# TODO: Handle a health_changed signal
