@@ -5,9 +5,6 @@ extends Node
 @export var mob_scale: Vector2 = Vector2(1.0, 1.0)
 @export var camera: Camera2D
 
-@onready var player : PlayerEntity = get_tree().get_first_node_in_group("player")
-
-enum SPAWN_SIDE {LEFT, RIGHT, TOP, BOTTOM}
 const margin_offset : Vector2 = Vector2(5, 5)
 
 # Called when the node enters the scene tree for the first time.
@@ -29,9 +26,7 @@ func _on_spawn_timer_timeout() -> void:
 	newEnemy.position = _get_random_spawn_position()
 
 	# TODO: Implement movement strategy
-	var direction = newEnemy.global_position.direction_to(player.global_position)
-	var speed = Vector2(randf_range(-50.0, 50.0), 0)
-	newEnemy.linear_velocity = speed.rotated(direction.angle())
+	
 	
 	#mob.linear_velocity = speed.rotated(direction.angle())
 
@@ -39,6 +34,7 @@ func _on_spawn_timer_timeout() -> void:
 	pass
 
 
+enum SPAWN_SIDE {LEFT, RIGHT, TOP, BOTTOM}
 func _get_random_spawn_position() -> Vector2:
 	var side_to_spawn_on = SPAWN_SIDE.values().pick_random()
 	var camera_origin = camera.get_canvas_transform().affine_inverse().get_origin() + margin_offset

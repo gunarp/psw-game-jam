@@ -54,3 +54,5 @@ camera = NodePath("../Camera2D")
 
 [node name="HudMain" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_g2vry")]
 player = NodePath("../Player")
+
+[connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
