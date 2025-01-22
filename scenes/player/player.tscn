@@ -1,24 +1,48 @@
-[gd_scene load_steps=9 format=3 uid="uid://o8hpxmhcss7m"]
+[gd_scene load_steps=11 format=3 uid="uid://o8hpxmhcss7m"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_fx8g5"]
-[ext_resource type="Texture2D" uid="uid://ctob5sq1c05bo" path="res://resource/player/playerGrey_walk1.png" id="1_r3v2o"]
 [ext_resource type="Shape2D" uid="uid://bbymik5wl8fdm" path="res://scenes/player/player-shape.tres" id="2_f6gb7"]
-[ext_resource type="Texture2D" uid="uid://balemcxfdpxn3" path="res://resource/player/playerGrey_walk2.png" id="2_m56i7"]
 [ext_resource type="PackedScene" uid="uid://u4ar3owfi8rq" path="res://scenes/utils/EntitySpeed.tscn" id="3_3ugq2"]
 [ext_resource type="PackedScene" uid="uid://c7ho68p0rqxul" path="res://scenes/utils/EntityHealth.tscn" id="5_jfhqk"]
+[ext_resource type="Texture2D" uid="uid://cvdtsfshhw75d" path="res://resource/player/player_transparent.png" id="5_wrljq"]
 [ext_resource type="PackedScene" uid="uid://doso4hrh01chk" path="res://scenes/ui/hud/HealthBar.tscn" id="6_mp63m"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ffi2t"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkbqg"]
+atlas = ExtResource("5_wrljq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cclxq"]
+atlas = ExtResource("5_wrljq")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpbkg"]
+atlas = ExtResource("5_wrljq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b3kxe"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_r3v2o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_m56i7")
+"texture": SubResource("AtlasTexture_nkbqg")
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cclxq")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpbkg")
+}],
+"loop": true,
+"name": &"sideways",
 "speed": 5.0
 }]
 
@@ -44,7 +68,8 @@ collision_mask = 61
 shape = ExtResource("2_f6gb7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_ffi2t")
+sprite_frames = SubResource("SpriteFrames_b3kxe")
+animation = &"down"
 
 [node name="CollideBox" type="CollisionShape2D" parent="."]
 shape = ExtResource("2_f6gb7")

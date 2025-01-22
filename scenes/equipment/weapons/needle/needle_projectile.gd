@@ -6,7 +6,7 @@ var num_bounces_left: int = 2
 
 func start(_weapon_properties: Weapon):
 	weapon_properties = _weapon_properties
-	rotation = weapon_properties.player.rotation
+	rotation = weapon_properties.player.facing_direction.angle()
 	position = weapon_properties.player.position
 	velocity = Vector2(weapon_properties.speed, 0).rotated(rotation)
 

@@ -29,10 +29,8 @@ region_enabled = true
 region_rect = Rect2(-2192, -1496, 4272, 3456)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(0.25, 0.25)
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("3_lx56x")]
-scale = Vector2(0.25, 0.25)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")

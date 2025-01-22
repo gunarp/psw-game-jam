@@ -6,6 +6,8 @@ signal player_died
 
 # TODO: make speed change with items
 var speed: int = 100
+var walking_direction: Vector2
+var facing_direction: Vector2
 
 # !! This only works with the capsule shape currently used as a placeholder !!
 @onready var health_bar_offset: Vector2 = -1 * (Vector2($PlayerHudElements/HealthBar.max_value / 2, $CollideBox.shape.height / 2) + Vector2(0, 10))
@@ -20,23 +22,58 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func _process(_delta: float) -> void:
+	walking_direction = _get_movement_input()
+	facing_direction = _get_direction_input()
+
 	# TODO: implement dynamic speed system
-	velocity = _get_movement_input() * speed
-	var direction = _get_direction_input()
-	rotation = direction.angle()
+	velocity = walking_direction * speed
 	
-	_render_character(direction)
+	_render_character()
 
 #region Rendering helpers
-func _render_character(direction: Vector2):
-	if self.velocity.length() > 0:
-		$AnimatedSprite2D.play()
+func _render_character():
+	# There's probably a more efficient way to do this with vector math
+	if (walking_direction.length() == 0):
+		$AnimatedSprite2D.play("default")
 	else:
-		$AnimatedSprite2D.stop()
+		# Approach - rotate vector into a new coordinate system
+		# and just use the x and y components to deduce which direction we are facing
+		# avoids dealing with too many floating point operations + perciion
+		var rotated_walking_direction = walking_direction.rotated(PI / 4)
+		
+		# This is a pretty verbose way of tackling this problem,
+		# but I think it covers scenarios that would otherwise slip through the cracks
+		# Special case - direction is a unit vector of our new coordinate system.
+		if (rotated_walking_direction.x == 0):
+			# Unit vector on y-axis
+			if (rotated_walking_direction.y > 0):
+				$AnimatedSprite2D.play("down")
+			else:
+				$AnimatedSprite2D.play("sideways")
+				$AnimatedSprite2D.flip_h = true
+		elif (rotated_walking_direction.y == 0):
+			# Unit vector on x-axis
+			if (rotated_walking_direction.x > 0):
+				$AnimatedSprite2D.play("sideways")
+				$AnimatedSprite2D.flip_h = false
+			else:
+				$AnimatedSprite2D.play("down")
+		else:
+			# "General" case
+			if (rotated_walking_direction.x > 0 and rotated_walking_direction.y > 0):
+				$AnimatedSprite2D.play("sideways")
+				$AnimatedSprite2D.flip_h = false
+			elif (rotated_walking_direction.x < 0 and rotated_walking_direction.y > 0):
+				$AnimatedSprite2D.play("down")
+			elif (rotated_walking_direction.x < 0 and rotated_walking_direction.y < 0):
+				$AnimatedSprite2D.play("sideways")
+				$AnimatedSprite2D.flip_h = true
+			elif (rotated_walking_direction.x > 0 and rotated_walking_direction.y < 0):
+				$AnimatedSprite2D.play("default")
 
 	# HealthBar and other PlayerHudElements should probably be decoupled from player
 	# Don't want to think about that now though, so this will do
-	$PlayerHudElements.global_rotation = 0
+	#$PlayerHudElements.global_rotation = 0
 	#$AnimatedSprite2D.flip_h = direction.x < 0
 #endregion
 
@@ -45,7 +82,7 @@ func _get_movement_input() -> Vector2:
 	# TODO: use joy_connection_changed event to add controller support
 	return Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-func _get_direction_input():
+func _get_direction_input() -> Vector2:
 	# TODO: gamepad support
 	return get_viewport().get_mouse_position() - (get_viewport_rect().size / 2)
 #endregion

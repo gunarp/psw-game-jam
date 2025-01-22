@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bss8tsiw4j8bo"]
+
+[ext_resource type="Script" path="res://scenes/equipment/weapons/needle/needle_projectile.gd" id="1_75e7k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ctsp3"]
+radius = 5.0
+
+[node name="NeedleProjectile" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 41
+script = ExtResource("1_75e7k")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(1, 2, 5, 0, 9, 2, 10, 5, 9, 8, 5, 10, 1, 8, 0, 5)
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, 5)
+shape = SubResource("CircleShape2D_ctsp3")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
