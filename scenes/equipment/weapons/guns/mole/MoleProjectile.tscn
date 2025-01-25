@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://bss8tsiw4j8bo"]
 
-[ext_resource type="Script" path="res://scenes/equipment/weapons/needle/needle_projectile.gd" id="1_75e7k"]
+[ext_resource type="Script" path="res://scenes/equipment/weapons/guns/mole/mole_projectile.gd" id="1_ic40i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ctsp3"]
 radius = 5.0
 
-[node name="NeedleProjectile" type="CharacterBody2D"]
+[node name="MoleProjectile" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 41
-script = ExtResource("1_75e7k")
+script = ExtResource("1_ic40i")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(1, 2, 5, 0, 9, 2, 10, 5, 9, 8, 5, 10, 1, 8, 0, 5)

@@ -9,9 +9,6 @@ var speed: int = 100
 var walking_direction: Vector2
 var facing_direction: Vector2
 
-# !! This only works with the capsule shape currently used as a placeholder !!
-@onready var health_bar_offset: Vector2 = -1 * (Vector2($PlayerHudElements/HealthBar.max_value / 2, $CollideBox.shape.height / 2) + Vector2(0, 10))
-
 func _ready():
 	_init_damage_subsystem()
 	_init_attack_subsystem()
@@ -30,12 +27,12 @@ func _process(_delta: float) -> void:
 	
 	_render_character()
 
+func get_height() -> float:
+	return $CollideBox.shape.height
+
 #region Rendering helpers
 func _render_character():
 	if (walking_direction.length() == 0):
-		
-		
-		
 		$AnimatedSprite2D.play("default")
 	else:
 		# Approach - rotate vector into a new coordinate system
@@ -72,11 +69,6 @@ func _render_character():
 				$AnimatedSprite2D.flip_h = true
 			elif (rotated_walking_direction.x > 0 and rotated_walking_direction.y < 0):
 				$AnimatedSprite2D.play("default")
-
-	# HealthBar and other PlayerHudElements should probably be decoupled from player
-	# Don't want to think about that now though, so this will do
-	#$PlayerHudElements.global_rotation = 0
-	#$AnimatedSprite2D.flip_h = direction.x < 0
 #endregion
 
 #region Input Helpers
@@ -98,7 +90,6 @@ var extra_lives : int = 1
 func _init_damage_subsystem() -> void:
 	$Parameters/Health.max_health = 100
 	$Parameters/Health.health = 100
-	$PlayerHudElements/HealthBar.set_position(health_bar_offset)
 	$DamageTimer.start(1.0 / damage_checks_per_second)
 	pass
 
@@ -131,13 +122,10 @@ func _on_health_entity_health_depleted() -> void:
 #var weapons : Array[Weapon] = []
 
 func _init_attack_subsystem():
-	print("intiialize attack subsystem")
-	var starting_weapon = load("res://scenes/equipment/weapons/Weapon.tscn").instantiate() as Weapon
+	var starting_weapon = load("res://scenes/equipment/weapons/guns/GunWeapon.tscn").instantiate() as Weapon
 	add_child(starting_weapon)
-	starting_weapon.initialize(self, load("res://scenes/equipment/weapons/needle/NeedleProjectile.tscn"))
-	#add_child(weapon_template.instantiate())
-	#weapons.push_back(weapon_template.instantiate())
-	#for w: Weapon in weapons:
-		#w.initialize(self, load("res://scenes/equipment/weapons/needle/NeedleProjectile.tscn"))
-	#print("initilizaiton subroutie complete")
+	starting_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/mole/MoleProjectile.tscn"))
+
+func get_attack_multiplier() -> float:
+	return $Parameters/PlayerStats.attack_multiplier
 #endregion

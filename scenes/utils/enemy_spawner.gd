@@ -7,25 +7,15 @@ extends Node
 
 const margin_offset : Vector2 = Vector2(5, 5)
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$SpawnTimer.start()
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	#print(camera.get_canvas_transform().affine_inverse().basis_xform(camera.get_viewport_rect().size))
-	#print(camera.get_canvas_transform().affine_inverse())
-	pass
 
 
 func _on_spawn_timer_timeout() -> void:
 	var newEnemy = mob_to_spawn.instantiate() as EnemyEntity
 	newEnemy.custom_set_scale(mob_scale)
 	newEnemy.position = _get_random_spawn_position()
-	add_sibling(newEnemy)
-	pass
+	get_tree().root.add_child(newEnemy)
 
 
 enum SPAWN_SIDE {LEFT, RIGHT, TOP, BOTTOM}

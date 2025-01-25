@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_fx8g5"]
 [ext_resource type="Shape2D" uid="uid://bbymik5wl8fdm" path="res://scenes/player/player-shape.tres" id="2_f6gb7"]
 [ext_resource type="PackedScene" uid="uid://u4ar3owfi8rq" path="res://scenes/utils/EntitySpeed.tscn" id="3_3ugq2"]
+[ext_resource type="Script" path="res://scenes/player/stats.gd" id="4_1b8mv"]
 [ext_resource type="PackedScene" uid="uid://c7ho68p0rqxul" path="res://scenes/utils/EntityHealth.tscn" id="5_jfhqk"]
 [ext_resource type="Texture2D" uid="uid://cvdtsfshhw75d" path="res://resource/player/player_transparent.png" id="5_wrljq"]
-[ext_resource type="PackedScene" uid="uid://doso4hrh01chk" path="res://scenes/ui/hud/HealthBar.tscn" id="6_mp63m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nkbqg"]
 atlas = ExtResource("5_wrljq")
@@ -60,6 +60,9 @@ script = ExtResource("1_fx8g5")
 
 [node name="EntitySpeed" parent="Parameters" instance=ExtResource("3_3ugq2")]
 
+[node name="PlayerStats" type="Node" parent="Parameters"]
+script = ExtResource("4_1b8mv")
+
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 61
@@ -74,15 +77,7 @@ animation = &"down"
 [node name="CollideBox" type="CollisionShape2D" parent="."]
 shape = ExtResource("2_f6gb7")
 
-[node name="PlayerHudElements" type="Node2D" parent="."]
-scale = Vector2(2, 2)
-
-[node name="HealthBar" parent="PlayerHudElements" node_paths=PackedStringArray("entity_health") instance=ExtResource("6_mp63m")]
-entity_health = NodePath("../../Parameters/Health")
-
 [node name="DamageTimer" type="Timer" parent="."]
-
-[node name="AttackTimer" type="Timer" parent="."]
 
 [connection signal="entity_health_depleted" from="Parameters/Health" to="." method="_on_health_entity_health_depleted"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_area_2d_body_entered"]

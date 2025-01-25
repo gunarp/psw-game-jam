@@ -8,4 +8,3 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	value = entity_health.health
 	
-# TODO: Handle a health_changed signal

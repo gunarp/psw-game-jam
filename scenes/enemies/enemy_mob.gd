@@ -7,6 +7,8 @@ class_name EnemyEntity
 # TODO: Refactor into specialized damage class
 var damagePerSecond : int = 10
 
+var despawn_delay : float = 1.5
+
 func custom_set_scale(sc: Vector2) -> void:
 	self.apply_scale(sc)
 	$AnimatedSprite2D.apply_scale(sc)
@@ -28,6 +30,12 @@ func hit(damage: float) -> void:
 	$Parameters/EntityHealth.on_damaged(damage)
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	$DespawnDelayTimer.start(despawn_delay)
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	$DespawnDelayTimer.stop()
+
+func _on_despawn_delay_timer_timeout() -> void:
 	queue_free()
 
 
