@@ -32,8 +32,10 @@ func _process(_delta: float) -> void:
 
 #region Rendering helpers
 func _render_character():
-	# There's probably a more efficient way to do this with vector math
 	if (walking_direction.length() == 0):
+		
+		
+		
 		$AnimatedSprite2D.play("default")
 	else:
 		# Approach - rotate vector into a new coordinate system
