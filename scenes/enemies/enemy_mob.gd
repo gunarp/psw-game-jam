@@ -18,6 +18,7 @@ func _ready() -> void:
 	$Parameters/EntitySpeed.set_speed(randf_range(50.0, 75.0))
 	$Parameters/EntityHealth.health = 10
 	$Parameters/EntityHealth.max_health = 10
+	self.lock_rotation = true
 	
 
 func _physics_process(delta: float) -> void:
