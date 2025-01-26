@@ -18,6 +18,9 @@ func update_cooldown(_cooldown: float) -> void:
 	$CooldownTimer.stop()
 	stats.cooldown = _cooldown
 	$CooldownTimer.start(stats.cooldown)
+	
+func level_up() -> void:
+	stats.level += 1
 
 func _on_cooldown_timer_timeout() -> void:
 	var projectile = weapon_type.instantiate()

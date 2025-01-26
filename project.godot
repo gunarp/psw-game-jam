@@ -29,6 +29,10 @@ folder_colors={
 "res://resource/": "yellow"
 }
 
+[global_group]
+
+walls=""
+
 [input]
 
 move_up={

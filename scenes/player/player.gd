@@ -124,7 +124,13 @@ func _on_health_entity_health_depleted() -> void:
 func _init_attack_subsystem():
 	var starting_weapon = load("res://scenes/equipment/weapons/guns/GunWeapon.tscn").instantiate() as Weapon
 	add_child(starting_weapon)
+	starting_weapon.level_up()
 	starting_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/mole/MoleProjectile.tscn"))
+	
+	var temp_weapon = load("res://scenes/equipment/weapons/guns/GunWeapon.tscn").instantiate() as Weapon
+	add_child(temp_weapon)
+	temp_weapon.level_up()
+	temp_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/needle/NeedleProjectile.tscn"))
 
 func get_attack_multiplier() -> float:
 	return $Parameters/PlayerStats.attack_multiplier
