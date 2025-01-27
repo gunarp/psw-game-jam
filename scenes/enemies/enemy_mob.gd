@@ -2,12 +2,22 @@ extends RigidBody2D
 
 class_name EnemyEntity
 
-@onready var player : PlayerEntity = get_tree().get_first_node_in_group("player")
+@onready var player: PlayerEntity = get_tree().get_first_node_in_group("player")
 
-# TODO: Refactor into specialized damage class
-var damagePerSecond : int = 10
+# Consider refactoring these into a dedicated enemy stats class
+# stats class can probably be static (shared among all instances of this class)
+# if we separate enemy types into individual classes as well
+var damagePerSecond: int = 10
+var damage_taken_multiplier: float = 1.0
+var despawn_delay: float = 1.5
 
-var despawn_delay : float = 1.5
+# not a required variable - but storing in this flag lets us
+# skip over a length calculation each physics state cycle
+var is_knockback_active: bool = false
+# (units / s)
+var knockback_applied: Vector2 = Vector2(0, 0)
+# knockback deceleration factor
+var knockback_decay: float = 0.5
 
 func custom_set_scale(sc: Vector2) -> void:
 	self.apply_scale(sc)
@@ -19,22 +29,51 @@ func _ready() -> void:
 	$Parameters/EntityHealth.health = 10
 	$Parameters/EntityHealth.max_health = 10
 	self.lock_rotation = true
-	
+
+
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	if (not is_knockback_active):
+		var direction = self.global_position.direction_to(player.global_position)
+		state.linear_velocity = $Parameters/EntitySpeed.get_velocity(direction)
+
 
 func _physics_process(delta: float) -> void:
-	var direction = self.global_position.direction_to(player.global_position)
-	self.linear_velocity = $Parameters/EntitySpeed.get_velocity(direction) 
-	#move_and_slide()
-	#newEnemy.linear_velocity = speed.rotated(direction.angle())
-	
-func hit(damage: float) -> void:
+	if (is_knockback_active):
+		knockback_applied *= knockback_decay * delta
+		if (knockback_applied.length() < 0.1):
+			is_knockback_active = false
+			$AnimatedSprite2D.modulate = Color.WHITE
+
+
+func hit(_player_ref: PlayerEntity, attack_stats: BaseStats, attack_direction: float) -> void:
+	# Could do an optional check against enemy defense stats here if we want
+	var player_stats = player.get_player_stats()
+
+	var damage : float = attack_stats.attack_power
+	damage *= player_stats.attack_multiplier
+	damage *= self.damage_taken_multiplier
 	$Parameters/EntityHealth.on_damaged(damage)
+
+	# Calculate knockback value
+	var knockback: float = attack_stats.knockback
+	knockback *= player_stats.knockback_multiplier
+	_apply_knockback(knockback, attack_direction)
+
+
+func _apply_knockback(knockback_power: float, knockback_direction: float) -> void:
+	knockback_applied = Vector2(1, 0).rotated(knockback_direction) * knockback_power
+	is_knockback_active = true
+	$AnimatedSprite2D.modulate = Color.RED
+	self.apply_impulse(knockback_applied)
+
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	$DespawnDelayTimer.start(despawn_delay)
 
+
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	$DespawnDelayTimer.stop()
+
 
 func _on_despawn_delay_timer_timeout() -> void:
 	queue_free()

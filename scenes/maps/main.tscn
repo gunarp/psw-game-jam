@@ -19,7 +19,6 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_ej86i")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(1.5, 1.5)
 
 [node name="HudMain" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_g2vry")]
 player = NodePath("../Player")
@@ -28,7 +27,6 @@ player = NodePath("../Player")
 entity_health = NodePath("../../Player/Parameters/Health")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("3_lx56x")]
-scale = Vector2(1.5, 1.5)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -49,7 +47,6 @@ debug_color = Color(1, 0.00965185, 0.0342356, 0.42)
 polygon = PackedVector2Array(-626, 55, -625, 94, 633, 95, 633, 55)
 
 [node name="EnemyFactory" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_giy5d")]
-spawn_timeout = 1
 mob_to_spawn = ExtResource("5_j7u6l")
 mob_scale = Vector2(0.5, 0.5)
 camera = NodePath("../Camera2D")
