@@ -5,25 +5,25 @@
 [ext_resource type="PackedScene" uid="uid://u4ar3owfi8rq" path="res://scenes/utils/EntitySpeed.tscn" id="3_3ugq2"]
 [ext_resource type="Script" path="res://scenes/player/stats.gd" id="4_1b8mv"]
 [ext_resource type="PackedScene" uid="uid://c7ho68p0rqxul" path="res://scenes/utils/EntityHealth.tscn" id="5_jfhqk"]
-[ext_resource type="Texture2D" uid="uid://cvdtsfshhw75d" path="res://resource/player/player_transparent.png" id="5_wrljq"]
+[ext_resource type="Texture2D" uid="uid://cmsppyj4nt1jo" path="res://resource/player/player_new.png" id="6_cnth7"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nkbqg"]
-atlas = ExtResource("5_wrljq")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_15ady"]
+atlas = ExtResource("6_cnth7")
+region = Rect2(0, 0, 33, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cclxq"]
-atlas = ExtResource("5_wrljq")
-region = Rect2(48, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5aj3"]
+atlas = ExtResource("6_cnth7")
+region = Rect2(102, 0, 33, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fpbkg"]
-atlas = ExtResource("5_wrljq")
-region = Rect2(16, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfq7j"]
+atlas = ExtResource("6_cnth7")
+region = Rect2(34, 0, 33, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b3kxe"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nkbqg")
+"texture": SubResource("AtlasTexture_15ady")
 }],
 "loop": true,
 "name": &"default",
@@ -31,7 +31,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cclxq")
+"texture": SubResource("AtlasTexture_w5aj3")
 }],
 "loop": true,
 "name": &"down",
@@ -39,7 +39,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fpbkg")
+"texture": SubResource("AtlasTexture_kfq7j")
 }],
 "loop": true,
 "name": &"sideways",
@@ -72,7 +72,6 @@ shape = ExtResource("2_f6gb7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_b3kxe")
-animation = &"down"
 
 [node name="CollideBox" type="CollisionShape2D" parent="."]
 shape = ExtResource("2_f6gb7")

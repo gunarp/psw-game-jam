@@ -1,22 +1,77 @@
-[gd_scene load_steps=3 format=3 uid="uid://bss8tsiw4j8bo"]
+[gd_scene load_steps=9 format=3 uid="uid://bss8tsiw4j8bo"]
 
 [ext_resource type="Script" path="res://scenes/equipment/weapons/guns/mole/mole_projectile.gd" id="1_ic40i"]
+[ext_resource type="Texture2D" uid="uid://cvdtsfshhw75d" path="res://resource/player/player_transparent.png" id="2_6s8rf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2axu7"]
+atlas = ExtResource("2_6s8rf")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ctsp3"]
 radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tpio"]
+atlas = ExtResource("2_6s8rf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmkst"]
+atlas = ExtResource("2_6s8rf")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26j5t"]
+atlas = ExtResource("2_6s8rf")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b8k7c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tpio")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmkst")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26j5t")
+}],
+"loop": true,
+"name": &"sideways",
+"speed": 5.0
+}]
 
 [node name="MoleProjectile" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 41
 script = ExtResource("1_ic40i")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(1, 2, 5, 0, 9, 2, 10, 5, 9, 8, 5, 10, 1, 8, 0, 5)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(5, 5)
+scale = Vector2(0.625, 0.625)
+texture = SubResource("AtlasTexture_2axu7")
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(5, 5)
 shape = SubResource("CircleShape2D_ctsp3")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(5, 5)
+scale = Vector2(0.625, 0.625)
+sprite_frames = SubResource("SpriteFrames_b8k7c")
+animation = &"sideways"
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

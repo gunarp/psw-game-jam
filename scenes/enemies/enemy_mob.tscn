@@ -1,19 +1,33 @@
-[gd_scene load_steps=8 format=3 uid="uid://xohjhgf0dntr"]
+[gd_scene load_steps=10 format=3 uid="uid://xohjhgf0dntr"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemy_mob.gd" id="1_7b5k8"]
-[ext_resource type="Texture2D" uid="uid://bb8qhvatcw3q4" path="res://resource/enemies/enemySwimming_1.png" id="1_rcwqd"]
 [ext_resource type="PackedScene" uid="uid://c7ho68p0rqxul" path="res://scenes/utils/EntityHealth.tscn" id="2_2bnxc"]
-[ext_resource type="Texture2D" uid="uid://bs3f361jq6yb4" path="res://resource/enemies/enemySwimming_2.png" id="2_cto45"]
 [ext_resource type="PackedScene" uid="uid://u4ar3owfi8rq" path="res://scenes/utils/EntitySpeed.tscn" id="3_cd0gw"]
+[ext_resource type="Texture2D" uid="uid://bx6gpc5w8tcf2" path="res://resource/enemies/bat.png" id="4_lmj0k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrho2"]
+atlas = ExtResource("4_lmj0k")
+region = Rect2(0, 3, 28, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljhyk"]
+atlas = ExtResource("4_lmj0k")
+region = Rect2(30, 3, 28, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f7k6"]
+atlas = ExtResource("4_lmj0k")
+region = Rect2(60, 3, 28, 12)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_73sov"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_rcwqd")
+"texture": SubResource("AtlasTexture_lrho2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_cto45")
+"texture": SubResource("AtlasTexture_ljhyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f7k6")
 }],
 "loop": true,
 "name": &"default",
@@ -21,8 +35,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_whrna"]
-radius = 25.0
-height = 66.0
+radius = 3.0
+height = 14.0
 
 [node name="EnemyMob" type="RigidBody2D"]
 collision_layer = 32
@@ -37,11 +51,13 @@ script = ExtResource("1_7b5k8")
 [node name="EntitySpeed" parent="Parameters" instance=ExtResource("3_cd0gw")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-rotation = -1.5708
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_73sov")
+frame = 2
+frame_progress = 0.943379
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_whrna")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

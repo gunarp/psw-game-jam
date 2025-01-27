@@ -4,10 +4,10 @@ extends Node
 class_name Weapon
 
 var player_ref: PlayerEntity
-var weapon_type : PackedScene
+var weapon_type: PackedScene
 
 # Generic weapon properties
-@onready var stats : BaseStats = BaseStats.new()
+@onready var stats: BaseStats = BaseStats.new()
 
 func initialize(_player_ref: PlayerEntity, _weapon: PackedScene) -> void:
 	self.player_ref = _player_ref
@@ -18,6 +18,9 @@ func update_cooldown(_cooldown: float) -> void:
 	$CooldownTimer.stop()
 	stats.cooldown = _cooldown
 	$CooldownTimer.start(stats.cooldown)
+
+func level_up() -> void:
+	stats.level += 1
 
 func _on_cooldown_timer_timeout() -> void:
 	var projectile = weapon_type.instantiate()
