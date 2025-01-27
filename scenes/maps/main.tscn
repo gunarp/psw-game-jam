@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ct7vpkc07hvkt"]
+[gd_scene load_steps=10 format=3 uid="uid://ct7vpkc07hvkt"]
 
 [ext_resource type="Script" path="res://scenes/maps/main.gd" id="1_e7vnp"]
 [ext_resource type="Texture2D" uid="uid://ccfrwaqh1p5g0" path="res://resource/map/map2.png" id="2_ej86i"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ckir6u1c1v46w" path="res://scenes/utils/EnemySpawner.tscn" id="4_giy5d"]
 [ext_resource type="PackedScene" uid="uid://xohjhgf0dntr" path="res://scenes/enemies/enemy_mob.tscn" id="5_j7u6l"]
 [ext_resource type="PackedScene" uid="uid://d0o2mwqlwtfgc" path="res://scenes/ui/hud/hud_main.tscn" id="6_g2vry"]
+[ext_resource type="AudioStream" uid="uid://dgjesibbhj6vm" path="res://resource/cook_1_loop.wav" id="8_t1gsw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdno6"]
 size = Vector2(1259.5, 38)
@@ -48,8 +49,11 @@ polygon = PackedVector2Array(-626, 55, -625, 94, 633, 95, 633, 55)
 
 [node name="EnemyFactory" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_giy5d")]
 mob_to_spawn = ExtResource("5_j7u6l")
-mob_scale = Vector2(0.5, 0.5)
 camera = NodePath("../Camera2D")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_t1gsw")
+autoplay = true
 
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
 

@@ -1,5 +1,7 @@
 extends Node
 
+enum SPAWN_SIDE {LEFT, RIGHT, TOP, BOTTOM}
+
 @export var spawn_timeout: float = 0.25
 @export var mob_to_spawn: PackedScene
 @export var mob_scale: Vector2 = Vector2(1.0, 1.0)
@@ -18,7 +20,6 @@ func _on_spawn_timer_timeout() -> void:
 	get_tree().root.add_child(newEnemy)
 
 
-enum SPAWN_SIDE {LEFT, RIGHT, TOP, BOTTOM}
 func _get_random_spawn_position() -> Vector2:
 	var side_to_spawn_on = SPAWN_SIDE.values().pick_random()
 	var camera_origin = camera.get_canvas_transform().affine_inverse().get_origin() + margin_offset

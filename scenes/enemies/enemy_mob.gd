@@ -18,6 +18,7 @@ var is_knockback_active: bool = false
 var knockback_applied: Vector2 = Vector2(0, 0)
 # knockback deceleration factor
 var knockback_decay: float = 0.5
+var knockback_threshhold: float = 0.1
 
 func custom_set_scale(sc: Vector2) -> void:
 	self.apply_scale(sc)
@@ -29,6 +30,7 @@ func _ready() -> void:
 	$Parameters/EntityHealth.health = 10
 	$Parameters/EntityHealth.max_health = 10
 	self.lock_rotation = true
+	$AnimatedSprite2D.play()
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
@@ -39,10 +41,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 func _physics_process(delta: float) -> void:
 	if (is_knockback_active):
-		knockback_applied *= knockback_decay * delta
-		if (knockback_applied.length() < 0.1):
-			is_knockback_active = false
-			$AnimatedSprite2D.modulate = Color.WHITE
+		_set_knockback(knockback_applied * knockback_decay * delta)
 
 
 func hit(_player_ref: PlayerEntity, attack_stats: BaseStats, attack_direction: float) -> void:
@@ -57,14 +56,20 @@ func hit(_player_ref: PlayerEntity, attack_stats: BaseStats, attack_direction: f
 	# Calculate knockback value
 	var knockback: float = attack_stats.knockback
 	knockback *= player_stats.knockback_multiplier
-	_apply_knockback(knockback, attack_direction)
+	_set_knockback(Vector2(1, 0).rotated(attack_direction) * knockback)
 
 
-func _apply_knockback(knockback_power: float, knockback_direction: float) -> void:
-	knockback_applied = Vector2(1, 0).rotated(knockback_direction) * knockback_power
-	is_knockback_active = true
-	$AnimatedSprite2D.modulate = Color.RED
-	self.apply_impulse(knockback_applied)
+func _set_knockback(knockback: Vector2) -> void:
+	knockback_applied = knockback
+	if (knockback_applied.length() >= knockback_threshhold):
+		is_knockback_active = true
+		$AnimatedSprite2D.stop()
+		$AnimatedSprite2D.modulate = Color(10, 10, 10, 10)
+		self.apply_impulse(knockback_applied)
+	else:
+		is_knockback_active = false
+		$AnimatedSprite2D.play()
+		$AnimatedSprite2D.modulate = Color.WHITE
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
