@@ -32,6 +32,8 @@ folder_colors={
 [global_group]
 
 walls=""
+projectile=""
+aoe="weapon's duration based effect"
 
 [input]
 

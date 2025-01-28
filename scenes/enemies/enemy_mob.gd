@@ -3,22 +3,12 @@ extends RigidBody2D
 class_name EnemyEntity
 
 @onready var player: PlayerEntity = get_tree().get_first_node_in_group("player")
-
-# Consider refactoring these into a dedicated enemy stats class
-# stats class can probably be static (shared among all instances of this class)
-# if we separate enemy types into individual classes as well
-var damagePerSecond: int = 10
-var damage_taken_multiplier: float = 1.0
-var despawn_delay: float = 1.5
+@onready var stats: EnemyStats = EnemyStats.new()
 
 # not a required variable - but storing in this flag lets us
 # skip over a length calculation each physics state cycle
 var is_knockback_active: bool = false
-# (units / s)
 var knockback_applied: Vector2 = Vector2(0, 0)
-# knockback deceleration factor
-var knockback_decay: float = 0.5
-var knockback_threshhold: float = 0.1
 
 func custom_set_scale(sc: Vector2) -> void:
 	self.apply_scale(sc)
@@ -41,16 +31,16 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 func _physics_process(delta: float) -> void:
 	if (is_knockback_active):
-		_set_knockback(knockback_applied * knockback_decay * delta)
+		_set_knockback(knockback_applied * stats.knockback_decay * delta)
 
 
-func hit(_player_ref: PlayerEntity, attack_stats: BaseStats, attack_direction: float) -> void:
+func hit(_player_ref: PlayerEntity, attack_stats: WeaponBaseStats, attack_direction: float) -> void:
 	# Could do an optional check against enemy defense stats here if we want
-	var player_stats = player.get_player_stats()
+	var player_stats = _player_ref.get_player_stats()
 
-	var damage : float = attack_stats.attack_power
+	var damage: float = attack_stats.attack_power
 	damage *= player_stats.attack_multiplier
-	damage *= self.damage_taken_multiplier
+	damage *= stats.damage_taken_multiplier
 	$Parameters/EntityHealth.on_damaged(damage)
 
 	# Calculate knockback value
@@ -61,7 +51,7 @@ func hit(_player_ref: PlayerEntity, attack_stats: BaseStats, attack_direction: f
 
 func _set_knockback(knockback: Vector2) -> void:
 	knockback_applied = knockback
-	if (knockback_applied.length() >= knockback_threshhold):
+	if (knockback_applied.length() >= stats.knockback_resistance):
 		is_knockback_active = true
 		$AnimatedSprite2D.stop()
 		$AnimatedSprite2D.modulate = Color(10, 10, 10, 10)
@@ -73,7 +63,7 @@ func _set_knockback(knockback: Vector2) -> void:
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	$DespawnDelayTimer.start(despawn_delay)
+	$DespawnDelayTimer.start(stats.despawn_delay_s)
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:

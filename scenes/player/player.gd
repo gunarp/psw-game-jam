@@ -10,6 +10,8 @@ var prev_walking_direction: Vector2
 var walking_direction: Vector2
 var facing_direction: Vector2
 
+@onready var weapon_base: PackedScene = load("uid://d1vg0ederhg3f")
+
 func _ready():
 	_init_damage_subsystem()
 	_init_attack_subsystem()
@@ -76,12 +78,12 @@ func _init_damage_subsystem() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is EnemyEntity:
-		damagePerSecond += body.damagePerSecond
+		damagePerSecond += body.stats.damage_per_second
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body is EnemyEntity:
-		damagePerSecond -= body.damagePerSecond
+		damagePerSecond -= body.stats.damage_per_second
 
 
 func _on_damage_timer_timeout() -> void:
@@ -98,27 +100,23 @@ func _on_health_entity_health_depleted() -> void:
 #endregion
 
 #region Attack Subsystem -- refactorout later
-# var list of weapons
-#@onready var default_weapon = preload("res://scenes/equipment/weapons/needle/needle.tscn")
-#var weapons : Array[Weapon] = []
-
 func _init_attack_subsystem():
-	var starting_weapon = load("res://scenes/equipment/weapons/guns/GunWeapon.tscn").instantiate() as Weapon
+	var starting_weapon = weapon_base.instantiate() as WeaponBase
 	add_child(starting_weapon)
 	starting_weapon.level_up()
 	starting_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/mole/MoleProjectile.tscn"))
 
-	var temp_weapon = load("res://scenes/equipment/weapons/guns/GunWeapon.tscn").instantiate() as Weapon
+	var temp_weapon = weapon_base.instantiate() as WeaponBase
 	add_child(temp_weapon)
 	temp_weapon.level_up()
 	temp_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/needle/NeedleProjectile.tscn"))
 
 
 func get_attack_multiplier() -> float:
-	return $Parameters/PlayerStats.attack_multiplier
+	return $Parameters/PlayerAttackStats.attack_multiplier
 
 func get_player_stats() -> PlayerStats:
-	return $Parameters/PlayerStats
+	return $Parameters/PlayerAttackStats
 #endregion
 
 

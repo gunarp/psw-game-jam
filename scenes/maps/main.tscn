@@ -158,4 +158,5 @@ script = ExtResource("11_y2ywm")
 
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
 
+[editable path="HudMain"]
 [editable path="Player"]

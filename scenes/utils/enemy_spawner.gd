@@ -7,7 +7,7 @@ enum SPAWN_SIDE {LEFT, RIGHT, TOP, BOTTOM}
 @export var mob_scale: Vector2 = Vector2(1.0, 1.0)
 @export var camera: Camera2D
 
-const margin_offset : Vector2 = Vector2(5, 5)
+const margin_offset: Vector2 = Vector2(5, 5)
 
 func _ready() -> void:
 	$SpawnTimer.start(spawn_timeout)
@@ -23,7 +23,7 @@ func _on_spawn_timer_timeout() -> void:
 func _get_random_spawn_position() -> Vector2:
 	var side_to_spawn_on = SPAWN_SIDE.values().pick_random()
 	var camera_origin = camera.get_canvas_transform().affine_inverse().get_origin() + margin_offset
-	var camera_extent = camera_origin + camera.get_viewport_rect().size - 2*margin_offset
+	var camera_extent = camera_origin + camera.get_viewport_rect().size - 2 * margin_offset
 
 	var spawn_pos = Vector2()
 	match side_to_spawn_on:
