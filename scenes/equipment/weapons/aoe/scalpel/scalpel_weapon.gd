@@ -4,7 +4,7 @@ var base_stats: WeaponBaseStats
 var player_ref: PlayerEntity
 
 var attacks_per_second: int = 8
-var inherent_scale: float = 1.25
+var inherent_scale: float = 1.5
 var offset: Vector2
 
 
@@ -12,12 +12,11 @@ func start(_player_ref: PlayerEntity, _base_stats: WeaponBaseStats):
   base_stats = _base_stats
   player_ref = _player_ref
 
-  base_stats.knockback = 150.0
+  base_stats.knockback = 300.0
 
   offset.x = player_ref.get_shape().radius + $EffectLeft/HitBox.shape.radius
   $DurationTimer.one_shot = true
   $CooldownTimer.one_shot = true
-  print("initialized weapon container")
   _deploy_children()
 
 

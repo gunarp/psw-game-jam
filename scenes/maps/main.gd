@@ -15,5 +15,21 @@ func _on_player_player_died() -> void:
 	print("Game Over :(")
 
 
-func _on_music_zone_1_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+func _on_main_region_area_entered(area:Area2D) -> void:
+	print("entered main region")
+
+
+func _on_heart_region_area_entered(area:Area2D) -> void:
+	print("entered heart")
+
+
+func _on_lung_region_area_entered(area:Area2D) -> void:
+	print("entered lungs")
+
+
+func _on_stomatch_region_area_entered(area:Area2D) -> void:
+	print("entered stomach")
+
+
+func _on_brain_region_area_entered(area:Area2D) -> void:
+	print("entered brain")

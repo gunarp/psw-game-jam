@@ -7,7 +7,6 @@ var player_ref: PlayerEntity
 func start(_player_ref: PlayerEntity, _base_stats: WeaponBaseStats):
   base_stats = _base_stats
   player_ref = _player_ref
-  print("started effect")
   activate()
 
 

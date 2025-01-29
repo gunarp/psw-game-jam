@@ -5,7 +5,7 @@ class_name PlayerEntity
 signal player_died
 
 # TODO: make speed change with items
-var speed: int = 100
+var speed: int = 120
 var prev_walking_direction: Vector2
 var walking_direction: Vector2
 var facing_direction: Vector2
@@ -68,7 +68,7 @@ func _get_direction_input() -> Vector2:
 var healingPerSecond: float = 1.0
 var damagePerSecond: float = 0
 var damage_checks_per_second: int = 10
-var extra_lives: int = 1
+var extra_lives: int = 0
 
 func _init_damage_subsystem() -> void:
 	$Parameters/Health.max_health = 100
@@ -87,6 +87,10 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 
 
 func _on_damage_timer_timeout() -> void:
+	if (damagePerSecond > healingPerSecond):
+		$AnimatedSprite2D.modulate = Color.DARK_RED
+	else:
+		$AnimatedSprite2D.modulate = Color.WHITE
 	$Parameters/Health.on_damaged((damagePerSecond - healingPerSecond) / damage_checks_per_second)
 
 

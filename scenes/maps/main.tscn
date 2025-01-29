@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=18 format=3 uid="uid://ct7vpkc07hvkt"]
+=======
+[gd_scene load_steps=17 format=3 uid="uid://ct7vpkc07hvkt"]
+>>>>>>> 755d9a8 (add region notifiers, some tweaking)
 
 [ext_resource type="Script" path="res://scenes/maps/main.gd" id="1_e7vnp"]
 [ext_resource type="Texture2D" uid="uid://clb5byrsj7ye8" path="res://resource/map/map3.png" id="2_xpte1"]
@@ -25,13 +29,40 @@ size = Vector2(36, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jghdu"]
 size = Vector2(30, 156)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_8m8r2"]
+a = Vector2(102, 74.0385)
+b = Vector2(22, 90.8654)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kvemd"]
+a = Vector2(20, 317)
+b = Vector2(20, 966)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bu05y"]
+size = Vector2(126.995, 19.4032)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efaww"]
+size = Vector2(214.151, 133.729)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_olrja"]
+size = Vector2(1412, 1564)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnktl"]
+size = Vector2(1416, 1561)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pfs5"]
+size = Vector2(1814, 1511)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_e7vnp")
 
 [node name="Brain" type="Sprite2D" parent="."]
+<<<<<<< HEAD
 scale = Vector2(2, 2)
 texture = ExtResource("2_xpte1")
+=======
+scale = Vector2(3, 3)
+texture = ExtResource("2_ej86i")
+>>>>>>> 755d9a8 (add region notifiers, some tweaking)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -90,6 +121,7 @@ debug_color = Color(1, 0.00965185, 0.0342356, 0.42)
 [node name="Polygon2D" type="Polygon2D" parent="Walls/StaticBody2D"]
 polygon = PackedVector2Array(-626, 55, -625, 94, 633, 95, 633, 55)
 
+<<<<<<< HEAD
 [node name="CollisionLungs" type="CollisionPolygon2D" parent="Walls/StaticBody2D"]
 polygon = PackedVector2Array(-604, 257, -638, 254, -680, 241, -717, 220, -753, 203, -814, 95, -865, 35, -901, 12, -937, 17, -958, 39, -973, 68, -985, 103, -988, 138, -989, 179, -1000, 183, -1021, 174, -1036, 158, -1053, 159, -1064, 168, -1087, 168, -1114, 159, -1126, 162, -1154, 181, -1174, 179, -1179, 93, -1201, 45, -1227, 20, -1251, 15, -1278, 21, -1322, 65, -1367, 130, -1403, 201, -1430, 263, -1465, 346, -1486, 407, -1508, 501, -1522, 555, -1527, 772, -1519, 853, -1497, 914, -1474, 954, -1456, 976, -1431, 992, -1249, 991, -1190, 978, -1144, 952, -1132, 941, -1123, 805, -1122, 642, -1129, 546, -1127, 395, -1132, 345, -1156, 294, -1166, 279, -1148, 261, -1120, 251, -1093, 248, -1084, 256, -1072, 253, -1056, 248, -1029, 256, -1007, 270, -995, 281, -1010, 302, -1019, 322, -1032, 343, -1037, 381, -1038, 461, -1034, 544, -1044, 678, -1043, 773, -1040, 859, -1034, 922, -1031, 941, -1007, 962, -972, 979, -884, 996, -784, 995, -721, 993, -692, 964, -668, 916, -644, 851, -630, 742, -640, 571, -648, 523, -685, 380, -703, 337, -684, 324, -660, 314, -611, 311, -604, 310, -604, 581, -610, 1063, -990, 1090, -1391, 1073, -1631, 989, -1613, 717, -1571, 467, -1490, 286, -1382, 62, -1258, -45, -1125, 56, -1113, 113, -1004, 49, -930, -36, -729, 89, -604, -72, -605, 226)
 
@@ -104,6 +136,17 @@ polygon = PackedVector2Array(692, 104, 819, 109, 864, 117, 899, 117, 947, 112, 9
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/StaticBody2D"]
 position = Vector2(-1, 209)
 polygon = PackedVector2Array(462, -276, 498, -307, 538, -358, 597, -456, 634, -540, 653, -620, 665, -694, 667, -796, 651, -896, 622, -1003, 592, -1063, 537, -1153, 510, -1188, 455, -1243, 405, -1284, 335, -1328, 322, -1334, -225, -1334, -304, -1284, -342, -1255, -404, -1190, -445, -1137, -480, -1082, -513, -1014, -532, -968, -555, -874, -564, -786, -562, -693, -551, -614, -531, -540, -492, -445, -461, -394, -421, -336, -360, -273, -604, -271, -581, -1288, -572, -1404, -21, -1389, 360, -1400, 641, -1187, 766, -843, 719, -586, 686, -365, 694, -270, 458, -268)
+=======
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls"]
+collision_mask = 126
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2"]
+scale = Vector2(1, 10.4)
+shape = SubResource("SegmentShape2D_8m8r2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls/StaticBody2D2"]
+shape = SubResource("SegmentShape2D_kvemd")
+>>>>>>> 755d9a8 (add region notifiers, some tweaking)
 
 [node name="EnemyFactory" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_giy5d")]
 mob_to_spawn = ExtResource("5_j7u6l")
@@ -156,7 +199,56 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("11_y2ywm")
 
+[node name="RegionNotifiers" type="Node" parent="."]
+
+[node name="MainRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/MainRegion"]
+position = Vector2(8.00005, -31.5)
+scale = Vector2(14.1738, 35.0974)
+shape = SubResource("RectangleShape2D_bu05y")
+
+[node name="HeartRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/HeartRegion"]
+position = Vector2(19, 1117)
+scale = Vector2(8.48, 11.8)
+shape = SubResource("RectangleShape2D_efaww")
+
+[node name="LungRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/LungRegion"]
+position = Vector2(-1622, 299)
+shape = SubResource("RectangleShape2D_olrja")
+
+[node name="StomatchRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/StomatchRegion"]
+position = Vector2(1640, 316.5)
+shape = SubResource("RectangleShape2D_mnktl")
+
+[node name="BrainRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/BrainRegion"]
+position = Vector2(17, -1139.5)
+shape = SubResource("RectangleShape2D_2pfs5")
+
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
+[connection signal="area_entered" from="RegionNotifiers/MainRegion" to="." method="_on_main_region_area_entered"]
+[connection signal="area_entered" from="RegionNotifiers/HeartRegion" to="." method="_on_heart_region_area_entered"]
+[connection signal="area_entered" from="RegionNotifiers/LungRegion" to="." method="_on_lung_region_area_entered"]
+[connection signal="area_entered" from="RegionNotifiers/StomatchRegion" to="." method="_on_stomatch_region_area_entered"]
+[connection signal="area_entered" from="RegionNotifiers/BrainRegion" to="." method="_on_brain_region_area_entered"]
 
 [editable path="HudMain"]
 [editable path="Player"]
