@@ -4,19 +4,31 @@ var base_stats: WeaponBaseStats
 var player_ref: PlayerEntity
 
 
-func _on_cooldown_timer_timeout() -> void:
-  # activate effect
-  # begin duration timer
-	pass # Replace with function body.
-
-func _on_duration_timer_timeout() -> void:
-  # disble effect
-  # begin cooldown timer
-	pass # Replace with function body.
+func start(_player_ref: PlayerEntity, _base_stats: WeaponBaseStats):
+  base_stats = _base_stats
+  player_ref = _player_ref
+  print("started effect")
+  activate()
 
 
-func _on_body_entered(body:Node2D) -> void:
-  # if body is an enemy type then apply hit effect
-  # also add enemy onto collision exception list.
-  # begin cooldown timer to remove exception from list as well
-	pass # Replace with function body.
+func activate() -> void:
+  $AnimatedSprite2D.show()
+  $AnimatedSprite2D.play()
+  # fencepost - Apply a hit onto any enemies currently within the space
+  _attack()
+
+
+func deactivate() -> void:
+  $AnimatedSprite2D.hide()
+  $AnimatedSprite2D.stop()
+
+
+func _attack() -> void:
+  for body in self.get_overlapping_bodies():
+    if (body.has_method("hit")):
+      body.hit(player_ref, base_stats, player_ref.position.angle_to_point(body.position))
+
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+  # Also play an attack noise
+  _attack()

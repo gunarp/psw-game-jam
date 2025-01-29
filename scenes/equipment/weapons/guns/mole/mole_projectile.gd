@@ -13,6 +13,7 @@ func start(_player_ref: PlayerEntity, _base_stats: WeaponBaseStats):
 	position = player_ref.position
 	var projectile_direction = player_ref.prev_walking_direction.angle() + PI
 	_update_velocity(Vector2(base_stats.speed, 0).rotated(projectile_direction))
+	scale = base_stats.scale * player_ref.get_player_stats().scale_multiplier
 	num_bounces_left = base_stats.level
 
 

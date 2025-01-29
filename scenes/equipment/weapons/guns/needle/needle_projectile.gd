@@ -12,6 +12,7 @@ func start(_player_ref: PlayerEntity, _base_stats: WeaponBaseStats):
 	rotation = player_ref.facing_direction.angle()
 	position = player_ref.position
 	velocity = Vector2(base_stats.speed, 0).rotated(rotation)
+	scale = base_stats.scale * player_ref.get_player_stats().scale_multiplier
 	num_pierce_left = base_stats.level
 
 

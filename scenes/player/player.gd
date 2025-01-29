@@ -33,8 +33,8 @@ func _process(_delta: float) -> void:
 	_render_character()
 
 
-func get_height() -> float:
-	return $CollideBox.shape.height
+func get_shape():
+	return $CollideBox.shape
 
 
 #region Rendering helpers
@@ -101,15 +101,20 @@ func _on_health_entity_health_depleted() -> void:
 
 #region Attack Subsystem -- refactorout later
 func _init_attack_subsystem():
-	var starting_weapon = weapon_base.instantiate() as WeaponBase
-	add_child(starting_weapon)
-	starting_weapon.level_up()
-	starting_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/mole/MoleProjectile.tscn"))
+	# var starting_weapon = weapon_base.instantiate() as WeaponBase
+	# add_child(starting_weapon)
+	# starting_weapon.level_up()
+	# starting_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/mole/MoleProjectile.tscn"))
 
-	var temp_weapon = weapon_base.instantiate() as WeaponBase
-	add_child(temp_weapon)
-	temp_weapon.level_up()
-	temp_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/needle/NeedleProjectile.tscn"))
+	var t = weapon_base.instantiate() as WeaponBase
+	add_child(t)
+	t.level_up()
+	t.initialize(self, load("res://scenes/equipment/weapons/aoe/scalpel/ScalpelWeapon.tscn"))
+
+	# var temp_weapon = weapon_base.instantiate() as WeaponBase
+	# add_child(temp_weapon)
+	# temp_weapon.level_up()
+	# temp_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/needle/NeedleProjectile.tscn"))
 
 
 func get_attack_multiplier() -> float:

@@ -46,6 +46,7 @@ func hit(_player_ref: PlayerEntity, attack_stats: WeaponBaseStats, attack_direct
 	# Calculate knockback value
 	var knockback: float = attack_stats.knockback
 	knockback *= player_stats.knockback_multiplier
+	print(attack_direction)
 	_set_knockback(Vector2(1, 0).rotated(attack_direction) * knockback)
 
 

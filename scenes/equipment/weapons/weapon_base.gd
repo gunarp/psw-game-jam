@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 ## This class is honestly pretty sloppy and would benefit from
 ## a good refactor. However I am too lazy to do this at the moment
@@ -23,7 +23,9 @@ func initialize(_player_ref: PlayerEntity, _weapon: PackedScene) -> void:
 		$CooldownTimer.start(stats.cooldown)
 	elif ("aoe" in weapon_group):
 		weapon_kind = WEAPON_KIND.aoe
-		add_child(weapon_recipe.instantiate())
+		var aoe_weapon = weapon_recipe.instantiate()
+		add_child(aoe_weapon)
+		aoe_weapon.start(player_ref, stats)
 	else:
 		weapon_kind = WEAPON_KIND.melee
 
@@ -41,6 +43,5 @@ func level_up() -> void:
 func _on_cooldown_timer_timeout() -> void:
 	var projectile = weapon_recipe.instantiate()
 	projectile.start(player_ref, stats)
-	projectile.scale = stats.scale
 	get_tree().root.add_child(projectile)
 
