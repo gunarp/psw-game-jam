@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://ct7vpkc07hvkt"]
+
+[ext_resource type="Script" path="res://scenes/maps/main.gd" id="1_e7vnp"]
+[ext_resource type="Texture2D" uid="uid://ccfrwaqh1p5g0" path="res://resource/map/map2.png" id="2_ej86i"]
+[ext_resource type="PackedScene" uid="uid://doso4hrh01chk" path="res://scenes/ui/hud/HealthBar.tscn" id="3_5preq"]
+[ext_resource type="PackedScene" uid="uid://o8hpxmhcss7m" path="res://scenes/player/player.tscn" id="3_lx56x"]
+[ext_resource type="PackedScene" uid="uid://ckir6u1c1v46w" path="res://scenes/utils/EnemySpawner.tscn" id="4_giy5d"]
+[ext_resource type="Texture2D" uid="uid://cb33od821usim" path="res://scenes/ui/hud/IMG_0076.png" id="5_3icwf"]
+[ext_resource type="PackedScene" uid="uid://xohjhgf0dntr" path="res://scenes/enemies/enemy_mob.tscn" id="5_j7u6l"]
+[ext_resource type="Script" path="res://scenes/maps/experience_todo.gd" id="6_2pxxg"]
+[ext_resource type="PackedScene" uid="uid://d0o2mwqlwtfgc" path="res://scenes/ui/hud/hud_main.tscn" id="6_g2vry"]
+[ext_resource type="AudioStream" uid="uid://dgjesibbhj6vm" path="res://resource/cook_1_loop.wav" id="8_t1gsw"]
+[ext_resource type="Script" path="res://scenes/maps/texture_rect.gd" id="8_wklew"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdno6"]
+size = Vector2(1259.5, 38)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_e7vnp")
+
+[node name="Brain" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_ej86i")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="HudMain" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_g2vry")]
+player = NodePath("../Player")
+
+[node name="HealthBar" parent="HudMain" node_paths=PackedStringArray("entity_health") instance=ExtResource("3_5preq")]
+entity_health = NodePath("../../Player/Parameters/Health")
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("3_lx56x")]
+
+[node name="Experience-todo" parent="Player/Parameters" index="1"]
+script = ExtResource("6_2pxxg")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -319.0
+offset_top = -241.0
+offset_right = 1601.0
+offset_bottom = 1199.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+mouse_filter = 0
+texture = ExtResource("5_3icwf")
+stretch_mode = 3
+script = ExtResource("8_wklew")
+metadata/_edit_use_anchors_ = true
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls" groups=["walls"]]
+position = Vector2(1, -209)
+collision_mask = 62
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+visibility_layer = 512
+position = Vector2(6, 75)
+shape = SubResource("RectangleShape2D_gdno6")
+debug_color = Color(1, 0.00965185, 0.0342356, 0.42)
+
+[node name="Polygon2D" type="Polygon2D" parent="Walls/StaticBody2D"]
+polygon = PackedVector2Array(-626, 55, -625, 94, 633, 95, 633, 55)
+
+[node name="EnemyFactory" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_giy5d")]
+mob_to_spawn = ExtResource("5_j7u6l")
+camera = NodePath("../Camera2D")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_t1gsw")
+autoplay = true
+
+[connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
+
+[editable path="Player"]
