@@ -8,6 +8,14 @@ extends Node
 	"brain": load("res://resource/music/cacophony.ogg"),
 }
 
+@onready var enemy_to_spawn = {
+	"main": load("res://scenes/enemies/bat/Bat.tscn"),
+	"heart": load("res://scenes/enemies/slime/GreenSlime.tscn"),
+	"stomach": load("res://scenes/enemies/slime/BlueSlime.tscn"),
+	"lung": load("res://scenes/enemies/bat/Bat.tscn"),
+	"brain": load("res://scenes/enemies/bat/Bat.tscn"),
+}
+
 var current_region: String
 
 
@@ -22,5 +30,7 @@ func _on_region_entered(_area: Area2D, entered_region: String) -> void:
 		return
 
 	current_region = entered_region
-	$AudioStreamPlayer.stream = tracks[entered_region]
+	$AudioStreamPlayer.stream = tracks[current_region]
 	$AudioStreamPlayer.play()
+
+	$EnemyFactory.change_mob_spawned(enemy_to_spawn[current_region])

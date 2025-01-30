@@ -15,8 +15,8 @@ func _ready() -> void:
 	$SpawnTimer.start(spawn_timeout)
 
 
-func change_mob_spawned(_other_mob) -> void:
-	pass
+func change_mob_spawned(new_enemy: PackedScene) -> void:
+	mob_to_spawn = new_enemy
 
 
 func _on_spawn_timer_timeout() -> void:

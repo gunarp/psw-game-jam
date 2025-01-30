@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/cardialgia.ogg-c47345870acc2b90eb629b29a6a732
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
