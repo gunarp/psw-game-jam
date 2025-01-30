@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct2rxkgn055lv"]
+
+[ext_resource type="Texture2D" uid="uid://kxdavae2lhs0" path="res://resource/map/keys_hex.png" id="1_l8ag1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jx1ys"]
+atlas = ExtResource("1_l8ag1")
+region = Rect2(0, 0, 24, 24)
+
+[node name="Key" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_jx1ys")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(12, 0, 6, 12, -6, 12, -12, 0, -6, -12, 6, -12)
