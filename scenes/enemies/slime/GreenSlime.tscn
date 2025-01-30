@@ -32,7 +32,7 @@ height = 20.0
 [node name="GreenSlime" type="RigidBody2D"]
 script = ExtResource("1_1jrbe")
 stats_speed = null
-stats_health = null
+stats_health = 15.0
 stats_damage_per_second = null
 stats_damage_taken_multiplier = null
 stats_despawn_delay_s = null

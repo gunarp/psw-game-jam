@@ -44,4 +44,3 @@ func _on_cooldown_timer_timeout() -> void:
 	var projectile = weapon_recipe.instantiate()
 	projectile.start(player_ref, stats)
 	get_tree().root.add_child(projectile)
-
