@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ct7vpkc07hvkt"]
+[gd_scene load_steps=15 format=3 uid="uid://c2bjkp73pcdkr"]
 
 [ext_resource type="Script" path="res://scenes/maps/main.gd" id="1_e7vnp"]
 [ext_resource type="Texture2D" uid="uid://clb5byrsj7ye8" path="res://resource/map/map3.png" id="2_xpte1"]
@@ -6,25 +6,24 @@
 [ext_resource type="PackedScene" uid="uid://o8hpxmhcss7m" path="res://scenes/player/player.tscn" id="3_lx56x"]
 [ext_resource type="PackedScene" uid="uid://ckir6u1c1v46w" path="res://scenes/utils/EnemySpawner.tscn" id="4_giy5d"]
 [ext_resource type="Texture2D" uid="uid://cb33od821usim" path="res://scenes/ui/hud/IMG_0076.png" id="5_3icwf"]
-[ext_resource type="PackedScene" uid="uid://xohjhgf0dntr" path="res://scenes/enemies/enemy_mob.tscn" id="5_j7u6l"]
 [ext_resource type="Script" path="res://scenes/maps/experience_todo.gd" id="6_2pxxg"]
 [ext_resource type="PackedScene" uid="uid://d0o2mwqlwtfgc" path="res://scenes/ui/hud/hud_main.tscn" id="6_g2vry"]
-[ext_resource type="AudioStream" uid="uid://ckxgql3j7shxh" path="res://resource/music/cacophony.ogg" id="10_41qeb"]
-[ext_resource type="Script" path="res://scenes/maps/music_zone_1.gd" id="11_y2ywm"]
-[ext_resource type="AudioStream" uid="uid://ceev7qlnhj6yl" path="res://resource/music/cardialgia.ogg" id="12_lntvy"]
-[ext_resource type="AudioStream" uid="uid://w2iirgtbgscc" path="res://resource/music/sphygmomanometer.ogg" id="13_k7tkq"]
+[ext_resource type="PackedScene" uid="uid://bfg2n1361d0kw" path="res://scenes/enemies/slime/BlueSlime.tscn" id="9_i5iwt"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdno6"]
-size = Vector2(1259.5, 38)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bu05y"]
+size = Vector2(86.3565, 15.5567)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy52h"]
-size = Vector2(53, 50)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efaww"]
+size = Vector2(136.203, 77.2881)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_slnq8"]
-size = Vector2(36, 20)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_olrja"]
+size = Vector2(874, 1022)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jghdu"]
-size = Vector2(30, 156)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnktl"]
+size = Vector2(870, 1024)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pfs5"]
+size = Vector2(1415, 1164)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_e7vnp")
@@ -81,15 +80,6 @@ remote_path = NodePath("../../Camera2D")
 position = Vector2(1, -209)
 collision_mask = 62
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
-visibility_layer = 512
-position = Vector2(6, 75)
-shape = SubResource("RectangleShape2D_gdno6")
-debug_color = Color(1, 0.00965185, 0.0342356, 0.42)
-
-[node name="Polygon2D" type="Polygon2D" parent="Walls/StaticBody2D"]
-polygon = PackedVector2Array(-626, 55, -625, 94, 633, 95, 633, 55)
-
 [node name="CollisionLungs" type="CollisionPolygon2D" parent="Walls/StaticBody2D"]
 polygon = PackedVector2Array(-604, 257, -638, 254, -680, 241, -717, 220, -753, 203, -814, 95, -865, 35, -901, 12, -937, 17, -958, 39, -973, 68, -985, 103, -988, 138, -989, 179, -1000, 183, -1021, 174, -1036, 158, -1053, 159, -1064, 168, -1087, 168, -1114, 159, -1126, 162, -1154, 181, -1174, 179, -1179, 93, -1201, 45, -1227, 20, -1251, 15, -1278, 21, -1322, 65, -1367, 130, -1403, 201, -1430, 263, -1465, 346, -1486, 407, -1508, 501, -1522, 555, -1527, 772, -1519, 853, -1497, 914, -1474, 954, -1456, 976, -1431, 992, -1249, 991, -1190, 978, -1144, 952, -1132, 941, -1123, 805, -1122, 642, -1129, 546, -1127, 395, -1132, 345, -1156, 294, -1166, 279, -1148, 261, -1120, 251, -1093, 248, -1084, 256, -1072, 253, -1056, 248, -1029, 256, -1007, 270, -995, 281, -1010, 302, -1019, 322, -1032, 343, -1037, 381, -1038, 461, -1034, 544, -1044, 678, -1043, 773, -1040, 859, -1034, 922, -1031, 941, -1007, 962, -972, 979, -884, 996, -784, 995, -721, 993, -692, 964, -668, 916, -644, 851, -630, 742, -640, 571, -648, 523, -685, 380, -703, 337, -684, 324, -660, 314, -611, 311, -604, 310, -604, 581, -610, 1063, -990, 1090, -1391, 1073, -1631, 989, -1613, 717, -1571, 467, -1490, 286, -1382, 62, -1258, -45, -1125, 56, -1113, 113, -1004, 49, -930, -36, -729, 89, -604, -72, -605, 226)
 
@@ -106,7 +96,7 @@ position = Vector2(-1, 209)
 polygon = PackedVector2Array(462, -276, 498, -307, 538, -358, 597, -456, 634, -540, 653, -620, 665, -694, 667, -796, 651, -896, 622, -1003, 592, -1063, 537, -1153, 510, -1188, 455, -1243, 405, -1284, 335, -1328, 322, -1334, -225, -1334, -304, -1284, -342, -1255, -404, -1190, -445, -1137, -480, -1082, -513, -1014, -532, -968, -555, -874, -564, -786, -562, -693, -551, -614, -531, -540, -492, -445, -461, -394, -421, -336, -360, -273, -604, -271, -581, -1288, -572, -1404, -21, -1389, 360, -1400, 641, -1187, 766, -843, 719, -586, 686, -365, 694, -270, 458, -268)
 
 [node name="EnemyFactory" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_giy5d")]
-mob_to_spawn = ExtResource("5_j7u6l")
+mob_to_spawn = ExtResource("9_i5iwt")
 camera = NodePath("../Camera2D")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -121,41 +111,61 @@ offset_right = 1764.0
 offset_bottom = 1553.0
 color = Color(0, 0, 0, 1)
 
-[node name="MusicZone1" type="Area2D" parent="."]
-collision_layer = 2
+[node name="RegionNotifiers" type="Node" parent="."]
+
+[node name="MainRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
 collision_mask = 2
-script = ExtResource("11_y2ywm")
-music_track = ExtResource("10_41qeb")
+input_pickable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MusicZone1"]
-position = Vector2(-632.5, 75)
-shape = SubResource("RectangleShape2D_gy52h")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/MainRegion"]
+position = Vector2(50, 60)
+scale = Vector2(14.1738, 35.0974)
+shape = SubResource("RectangleShape2D_bu05y")
 
-[node name="MusicZone2" type="Area2D" parent="."]
-collision_layer = 2
+[node name="HeartRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
 collision_mask = 2
-script = ExtResource("11_y2ywm")
-music_track = ExtResource("12_lntvy")
+input_pickable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MusicZone2"]
-position = Vector2(2, 385)
-shape = SubResource("RectangleShape2D_slnq8")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/HeartRegion"]
+position = Vector2(-8.5, 833)
+scale = Vector2(8.48, 11.8)
+shape = SubResource("RectangleShape2D_efaww")
 
-[node name="MusicZone3" type="Area2D" parent="."]
-collision_layer = 2
+[node name="LungRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
 collision_mask = 2
-script = ExtResource("11_y2ywm")
-music_track = ExtResource("13_k7tkq")
+input_pickable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MusicZone3"]
-position = Vector2(711, 24)
-shape = SubResource("RectangleShape2D_jghdu")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/LungRegion"]
+position = Vector2(-1092, 300)
+shape = SubResource("RectangleShape2D_olrja")
 
-[node name="MusicZone4" type="Area2D" parent="."]
-collision_layer = 2
+[node name="StomatchRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
 collision_mask = 2
-script = ExtResource("11_y2ywm")
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/StomatchRegion"]
+position = Vector2(1152, 251)
+shape = SubResource("RectangleShape2D_mnktl")
+
+[node name="BrainRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
+collision_mask = 2
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/BrainRegion"]
+position = Vector2(13.5, -849)
+shape = SubResource("RectangleShape2D_2pfs5")
 
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
+[connection signal="area_entered" from="RegionNotifiers/MainRegion" to="." method="_on_region_entered" binds= ["main"]]
+[connection signal="area_entered" from="RegionNotifiers/HeartRegion" to="." method="_on_region_entered" binds= ["heart"]]
+[connection signal="area_entered" from="RegionNotifiers/LungRegion" to="." method="_on_region_entered" binds= ["lung"]]
+[connection signal="area_entered" from="RegionNotifiers/StomatchRegion" to="." method="_on_region_entered" binds= ["stomach"]]
+[connection signal="area_entered" from="RegionNotifiers/BrainRegion" to="." method="_on_region_entered" binds= ["brain"]]
 
+[editable path="HudMain"]
 [editable path="Player"]

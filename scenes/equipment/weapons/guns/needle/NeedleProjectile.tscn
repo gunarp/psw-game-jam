@@ -5,7 +5,7 @@
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c2yxx"]
 
-[node name="NeedleProjectile" type="CharacterBody2D"]
+[node name="NeedleProjectile" type="CharacterBody2D" groups=["projectile"]]
 collision_layer = 4
 collision_mask = 41
 script = ExtResource("1_ehfu0")

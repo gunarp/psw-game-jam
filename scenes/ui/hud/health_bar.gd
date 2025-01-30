@@ -5,6 +5,7 @@ extends TextureProgressBar
 func _ready() -> void:
 	value = entity_health.health
 
-func _process(delta: float) -> void:
+
+func _process(_delta: float) -> void:
 	value = entity_health.health
-	
+

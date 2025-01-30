@@ -5,10 +5,12 @@ class_name PlayerEntity
 signal player_died
 
 # TODO: make speed change with items
-var speed: int = 100
+var speed: int = 120
 var prev_walking_direction: Vector2
 var walking_direction: Vector2
 var facing_direction: Vector2
+
+@onready var weapon_base: PackedScene = load("uid://d1vg0ederhg3f")
 
 func _ready():
 	_init_damage_subsystem()
@@ -31,8 +33,8 @@ func _process(_delta: float) -> void:
 	_render_character()
 
 
-func get_height() -> float:
-	return $CollideBox.shape.height
+func get_shape():
+	return $CollideBox.shape
 
 
 #region Rendering helpers
@@ -66,7 +68,7 @@ func _get_direction_input() -> Vector2:
 var healingPerSecond: float = 1.0
 var damagePerSecond: float = 0
 var damage_checks_per_second: int = 10
-var extra_lives: int = 1
+var extra_lives: int = 0
 
 func _init_damage_subsystem() -> void:
 	$Parameters/Health.max_health = 100
@@ -76,15 +78,19 @@ func _init_damage_subsystem() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is EnemyEntity:
-		damagePerSecond += body.damagePerSecond
+		damagePerSecond += body.get_dps()
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body is EnemyEntity:
-		damagePerSecond -= body.damagePerSecond
+		damagePerSecond -= body.get_dps()
 
 
 func _on_damage_timer_timeout() -> void:
+	if (damagePerSecond > healingPerSecond):
+		$AnimatedSprite2D.modulate = Color.DARK_RED
+	else:
+		$AnimatedSprite2D.modulate = Color.WHITE
 	$Parameters/Health.on_damaged((damagePerSecond - healingPerSecond) / damage_checks_per_second)
 
 
@@ -98,29 +104,27 @@ func _on_health_entity_health_depleted() -> void:
 #endregion
 
 #region Attack Subsystem -- refactorout later
-# var list of weapons
-#@onready var default_weapon = preload("res://scenes/equipment/weapons/needle/needle.tscn")
-#var weapons : Array[Weapon] = []
-
 func _init_attack_subsystem():
-	var starting_weapon = load("res://scenes/equipment/weapons/guns/GunWeapon.tscn").instantiate() as Weapon
+	var starting_weapon = weapon_base.instantiate() as WeaponBase
 	add_child(starting_weapon)
 	starting_weapon.level_up()
 	starting_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/mole/MoleProjectile.tscn"))
 
-	var temp_weapon = load("res://scenes/equipment/weapons/guns/GunWeapon.tscn").instantiate() as Weapon
+	var t = weapon_base.instantiate() as WeaponBase
+	add_child(t)
+	t.level_up()
+	t.initialize(self, load("res://scenes/equipment/weapons/aoe/scalpel/ScalpelWeapon.tscn"))
+
+	var temp_weapon = weapon_base.instantiate() as WeaponBase
 	add_child(temp_weapon)
 	temp_weapon.level_up()
 	temp_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/needle/NeedleProjectile.tscn"))
 
 
 func get_attack_multiplier() -> float:
-	return $Parameters/PlayerStats.attack_multiplier
+	return $Parameters/PlayerAttackStats.attack_multiplier
 
 func get_player_stats() -> PlayerStats:
-	return $Parameters/PlayerStats
+	return $Parameters/PlayerAttackStats
 #endregion
 
-
-func _on_music_zone_1_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.

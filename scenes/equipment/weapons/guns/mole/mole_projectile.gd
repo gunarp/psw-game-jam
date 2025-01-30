@@ -1,19 +1,19 @@
 extends CharacterBody2D
 
-var base_stats: BaseStats
+var base_stats: WeaponBaseStats
 var player_ref: PlayerEntity
 
 # weapon specific properties
 var num_bounces_left: int
 var last_object_collided_with: int = 0
 
-func start(_player_ref: PlayerEntity, _base_stats: BaseStats):
+func start(_player_ref: PlayerEntity, _base_stats: WeaponBaseStats):
 	base_stats = _base_stats
 	player_ref = _player_ref
 	position = player_ref.position
-	# var projectile_direction = player_ref.facing_direction.angle() + PI
 	var projectile_direction = player_ref.prev_walking_direction.angle() + PI
 	_update_velocity(Vector2(base_stats.speed, 0).rotated(projectile_direction))
+	scale = base_stats.scale * player_ref.get_player_stats().scale_multiplier
 	num_bounces_left = base_stats.level
 
 

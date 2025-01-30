@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://ced3hv206kfco"]
+
+[ext_resource type="Script" path="res://scenes/equipment/weapons/aoe/scalpel/scalpel_effect.gd" id="1_bosxu"]
+[ext_resource type="Texture2D" uid="uid://8gtscaqmajof" path="res://resource/weapons/scalpel_slash.png" id="1_cunke"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wpkuc"]
+radius = 6.0
+height = 26.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qs4n"]
+atlas = ExtResource("1_cunke")
+region = Rect2(0, 0, 12, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqwto"]
+atlas = ExtResource("1_cunke")
+region = Rect2(15, 0, 12, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0u8j0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2qs4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqwto")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="ScalpelEffect" type="Area2D" groups=["aoe"]]
+collision_layer = 4
+collision_mask = 40
+script = ExtResource("1_bosxu")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_wpkuc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0u8j0")
+frame_progress = 0.065186
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

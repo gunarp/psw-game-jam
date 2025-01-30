@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfg2n1361d0kw"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy_entity.gd" id="1_lnl8w"]
+[ext_resource type="Texture2D" uid="uid://croqjcyw5dmuu" path="res://resource/enemies/slime.png" id="2_f1owj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8j25"]
+atlas = ExtResource("2_f1owj")
+region = Rect2(36, 3, 17, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okoah"]
+atlas = ExtResource("2_f1owj")
+region = Rect2(54, 3, 17, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_504yf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8j25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okoah")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ngn5x"]
+radius = 7.0
+height = 20.0
+
+[node name="BlueSlime" type="RigidBody2D"]
+script = ExtResource("1_lnl8w")
+stats_speed = 100.0
+stats_health = null
+stats_damage_per_second = null
+stats_damage_taken_multiplier = null
+stats_despawn_delay_s = null
+stats_knockback_resistance = null
+stats_knockback_decay = null
+stats_experience_dropped = null
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_504yf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ngn5x")
