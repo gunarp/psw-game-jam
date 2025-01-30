@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c2bjkp73pcdkr"]
+[gd_scene load_steps=14 format=3 uid="uid://c2bjkp73pcdkr"]
 
 [ext_resource type="Script" path="res://scenes/maps/main.gd" id="1_e7vnp"]
 [ext_resource type="Texture2D" uid="uid://clb5byrsj7ye8" path="res://resource/map/map3.png" id="2_xpte1"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://o8hpxmhcss7m" path="res://scenes/player/player.tscn" id="3_lx56x"]
 [ext_resource type="PackedScene" uid="uid://ckir6u1c1v46w" path="res://scenes/utils/EnemySpawner.tscn" id="4_giy5d"]
 [ext_resource type="Texture2D" uid="uid://cb33od821usim" path="res://scenes/ui/hud/IMG_0076.png" id="5_3icwf"]
-[ext_resource type="Script" path="res://scenes/maps/experience_todo.gd" id="6_2pxxg"]
 [ext_resource type="PackedScene" uid="uid://d0o2mwqlwtfgc" path="res://scenes/ui/hud/hud_main.tscn" id="6_g2vry"]
 [ext_resource type="PackedScene" uid="uid://bfg2n1361d0kw" path="res://scenes/enemies/slime/BlueSlime.tscn" id="9_i5iwt"]
 
@@ -67,9 +66,6 @@ metadata/_edit_use_anchors_ = true
 entity_health = NodePath("../../Player/Parameters/Health")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("3_lx56x")]
-
-[node name="Experience-todo" parent="Player/Parameters" index="1"]
-script = ExtResource("6_2pxxg")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
