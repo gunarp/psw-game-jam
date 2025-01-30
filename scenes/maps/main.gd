@@ -13,3 +13,7 @@ func _process(_delta: float) -> void:
 
 func _on_player_player_died() -> void:
 	print("Game Over :(")
+
+
+func _on_music_zone_1_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

@@ -120,3 +120,7 @@ func get_attack_multiplier() -> float:
 func get_player_stats() -> PlayerStats:
 	return $Parameters/PlayerStats
 #endregion
+
+
+func _on_music_zone_1_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
