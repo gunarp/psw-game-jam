@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://p56o2kgxf7us"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy_entity.gd" id="1_wk13s"]
+[ext_resource type="Texture2D" uid="uid://df4dp2j6bj3ty" path="res://resource/enemies/skull.png" id="2_s8bxj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vc7y"]
+atlas = ExtResource("2_s8bxj")
+region = Rect2(20, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drps7"]
+atlas = ExtResource("2_s8bxj")
+region = Rect2(40, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqufd"]
+atlas = ExtResource("2_s8bxj")
+region = Rect2(60, 0, 20, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_onvyp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vc7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drps7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqufd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgq13"]
+size = Vector2(15, 20)
+
+[node name="Skull" type="RigidBody2D"]
+script = ExtResource("1_wk13s")
+should_flip = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_onvyp")
+frame = 1
+frame_progress = 0.833619
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.18557e-08, 0.5)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_pgq13")

@@ -12,7 +12,7 @@ extends Node
 	"main": load("res://scenes/enemies/bat/Bat.tscn"),
 	"heart": load("res://scenes/enemies/slime/GreenSlime.tscn"),
 	"stomach": load("res://scenes/enemies/slime/BlueSlime.tscn"),
-	"lung": load("res://scenes/enemies/bat/Bat.tscn"),
+	"lung": load("res://scenes/enemies/skull/skull.tscn"),
 	"brain": load("res://scenes/enemies/bat/Bat.tscn"),
 }
 

@@ -22,6 +22,9 @@ class_name EnemyEntity
 ## This should probalby be in another class
 @export var stats_experience_dropped: int = 10
 
+@export_group("Animation Properties")
+@export var should_flip: bool = false
+
 var despawn_timer = Timer.new()
 var on_screen_notifier = VisibleOnScreenNotifier2D.new()
 
@@ -78,7 +81,9 @@ func get_dps() -> float:
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
   if (not is_knockback_active):
     var direction = self.global_position.direction_to(player.global_position)
-    state.linear_velocity = direction.normalized() * stats_speed
+    state.linear_velocity = direction * stats_speed
+    if (self.should_flip):
+      $AnimatedSprite2D.flip_h = (direction.x > 0)
 
 
 func _physics_process(delta: float) -> void:
@@ -110,7 +115,6 @@ func _set_scale_custom(sc: Vector2) -> void:
 
 func _set_is_knocked(knocked: bool) -> void:
   if knocked:
-    print("knocked")
     $AnimatedSprite2D.stop()
     $AnimatedSprite2D.modulate = Color(10, 10, 10, 10)
   else:

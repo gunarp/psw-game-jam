@@ -38,13 +38,6 @@ height = 12.0
 
 [node name="BatVisual" type="RigidBody2D"]
 script = ExtResource("1_xy5la")
-stats_speed = null
-stats_damage_per_second = null
-stats_damage_taken_multiplier = null
-stats_despawn_delay_s = null
-stats_knockback_resistance = null
-stats_knockback_decay = null
-stats_experience_dropped = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
