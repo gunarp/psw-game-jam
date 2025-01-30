@@ -5,7 +5,7 @@ func _ready() -> void:
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	#print("target: ", $Camera2D.get_target_position(), " center: ", $Camera2D.position)
 	#print($Camera2D.custom_viewport)
 	pass

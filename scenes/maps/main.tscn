@@ -38,6 +38,7 @@ script = ExtResource("3_q8j3s")
 player = NodePath("../../Player")
 
 [node name="TextureRect" type="TextureRect" parent="HudMain/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -4.075

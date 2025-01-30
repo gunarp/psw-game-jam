@@ -1,11 +1,9 @@
 extends Node
 
 var experience = 0 # Current experience
-var experience_level = 1 
+var level = 1 
 var experience_to_level = 100
 var experience_per_enemy = 10
-
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

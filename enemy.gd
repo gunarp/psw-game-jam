@@ -1,9 +1,11 @@
 extends Node
 
+@export var xp_value = 10 # Exp value for this enemy
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var player: Node
+
+func _ready():
+	player = get_node("/main/Player")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
