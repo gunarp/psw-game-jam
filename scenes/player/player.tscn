@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://o8hpxmhcss7m"]
+[gd_scene load_steps=13 format=3 uid="uid://o8hpxmhcss7m"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_fx8g5"]
 [ext_resource type="Shape2D" uid="uid://bbymik5wl8fdm" path="res://scenes/player/player-shape.tres" id="2_f6gb7"]
@@ -47,11 +47,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xphs8"]
+radius = 25.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_fx8g5")
+metadata/_edit_group_ = true
 
 [node name="Parameters" type="Node" parent="."]
 
@@ -79,6 +83,11 @@ sprite_frames = SubResource("SpriteFrames_b3kxe")
 shape = ExtResource("2_f6gb7")
 
 [node name="DamageTimer" type="Timer" parent="."]
+
+[node name="PickupCircle" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupCircle"]
+shape = SubResource("CircleShape2D_xphs8")
 
 [connection signal="entity_health_depleted" from="Parameters/Health" to="." method="_on_health_entity_health_depleted"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_area_2d_body_entered"]
