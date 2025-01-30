@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2bjkp73pcdkr"]
+[gd_scene load_steps=15 format=3 uid="uid://c2bjkp73pcdkr"]
 
 [ext_resource type="Script" path="res://scenes/maps/main.gd" id="1_e7vnp"]
 [ext_resource type="Texture2D" uid="uid://clb5byrsj7ye8" path="res://resource/map/map3.png" id="2_xpte1"]
@@ -9,9 +9,6 @@
 [ext_resource type="Script" path="res://scenes/maps/experience_todo.gd" id="6_2pxxg"]
 [ext_resource type="PackedScene" uid="uid://d0o2mwqlwtfgc" path="res://scenes/ui/hud/hud_main.tscn" id="6_g2vry"]
 [ext_resource type="PackedScene" uid="uid://bfg2n1361d0kw" path="res://scenes/enemies/slime/BlueSlime.tscn" id="9_i5iwt"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdno6"]
-size = Vector2(1259.5, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bu05y"]
 size = Vector2(86.3565, 15.5567)
@@ -82,15 +79,6 @@ remote_path = NodePath("../../Camera2D")
 [node name="StaticBody2D" type="StaticBody2D" parent="Walls" groups=["walls"]]
 position = Vector2(1, -209)
 collision_mask = 62
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
-visibility_layer = 512
-position = Vector2(6, 75)
-shape = SubResource("RectangleShape2D_gdno6")
-debug_color = Color(1, 0.00965185, 0.0342356, 0.42)
-
-[node name="Polygon2D" type="Polygon2D" parent="Walls/StaticBody2D"]
-polygon = PackedVector2Array(-626, 55, -625, 94, 633, 95, 633, 55)
 
 [node name="CollisionLungs" type="CollisionPolygon2D" parent="Walls/StaticBody2D"]
 polygon = PackedVector2Array(-604, 257, -638, 254, -680, 241, -717, 220, -753, 203, -814, 95, -865, 35, -901, 12, -937, 17, -958, 39, -973, 68, -985, 103, -988, 138, -989, 179, -1000, 183, -1021, 174, -1036, 158, -1053, 159, -1064, 168, -1087, 168, -1114, 159, -1126, 162, -1154, 181, -1174, 179, -1179, 93, -1201, 45, -1227, 20, -1251, 15, -1278, 21, -1322, 65, -1367, 130, -1403, 201, -1430, 263, -1465, 346, -1486, 407, -1508, 501, -1522, 555, -1527, 772, -1519, 853, -1497, 914, -1474, 954, -1456, 976, -1431, 992, -1249, 991, -1190, 978, -1144, 952, -1132, 941, -1123, 805, -1122, 642, -1129, 546, -1127, 395, -1132, 345, -1156, 294, -1166, 279, -1148, 261, -1120, 251, -1093, 248, -1084, 256, -1072, 253, -1056, 248, -1029, 256, -1007, 270, -995, 281, -1010, 302, -1019, 322, -1032, 343, -1037, 381, -1038, 461, -1034, 544, -1044, 678, -1043, 773, -1040, 859, -1034, 922, -1031, 941, -1007, 962, -972, 979, -884, 996, -784, 995, -721, 993, -692, 964, -668, 916, -644, 851, -630, 742, -640, 571, -648, 523, -685, 380, -703, 337, -684, 324, -660, 314, -611, 311, -604, 310, -604, 581, -610, 1063, -990, 1090, -1391, 1073, -1631, 989, -1613, 717, -1571, 467, -1490, 286, -1382, 62, -1258, -45, -1125, 56, -1113, 113, -1004, 49, -930, -36, -729, 89, -604, -72, -605, 226)
