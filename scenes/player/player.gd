@@ -78,12 +78,12 @@ func _init_damage_subsystem() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is EnemyEntity:
-		damagePerSecond += body.stats.damage_per_second
+		damagePerSecond += body.get_dps()
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body is EnemyEntity:
-		damagePerSecond -= body.stats.damage_per_second
+		damagePerSecond -= body.get_dps()
 
 
 func _on_damage_timer_timeout() -> void:
@@ -128,6 +128,3 @@ func get_player_stats() -> PlayerStats:
 	return $Parameters/PlayerAttackStats
 #endregion
 
-
-func _on_music_zone_1_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.

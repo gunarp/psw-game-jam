@@ -3,9 +3,11 @@ extends Node
 enum SPAWN_SIDE {LEFT, RIGHT, TOP, BOTTOM}
 
 @export var spawn_timeout: float = 0.25
-@export var mob_to_spawn: PackedScene
+@export var mob_to_spawn: PackedScene # packed EnemyEntity
 @export var mob_scale: Vector2 = Vector2(1.0, 1.0)
 @export var camera: Camera2D
+
+@onready var player: PlayerEntity = get_tree().get_first_node_in_group("player")
 
 const margin_offset: Vector2 = Vector2(5, 5)
 
@@ -13,9 +15,13 @@ func _ready() -> void:
 	$SpawnTimer.start(spawn_timeout)
 
 
+func change_mob_spawned(_other_mob) -> void:
+	pass
+
+
 func _on_spawn_timer_timeout() -> void:
 	var newEnemy = mob_to_spawn.instantiate() as EnemyEntity
-	newEnemy.custom_set_scale(mob_scale)
+	newEnemy.initialize(player, mob_scale)
 	newEnemy.position = _get_random_spawn_position()
 	get_tree().root.add_child(newEnemy)
 

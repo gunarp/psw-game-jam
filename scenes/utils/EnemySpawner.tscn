@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckir6u1c1v46w"]
+[gd_scene load_steps=3 format=3 uid="uid://ckir6u1c1v46w"]
 
 [ext_resource type="Script" path="res://scenes/utils/enemy_spawner.gd" id="1_v1r03"]
+[ext_resource type="PackedScene" uid="uid://cweohe2e45fnc" path="res://scenes/enemies/bat/Bat.tscn" id="2_apmbm"]
 
 [node name="EnemySpawner" type="Node"]
 script = ExtResource("1_v1r03")
+mob_to_spawn = ExtResource("2_apmbm")
 
 [node name="SpawnTimer" type="Timer" parent="."]
 

@@ -10,6 +10,7 @@ extends Node
 
 var current_region: String
 
+
 func _on_player_player_died() -> void:
 	print("Game Over :(")
 

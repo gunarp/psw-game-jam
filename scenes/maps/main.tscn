@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://o8hpxmhcss7m" path="res://scenes/player/player.tscn" id="3_lx56x"]
 [ext_resource type="PackedScene" uid="uid://ckir6u1c1v46w" path="res://scenes/utils/EnemySpawner.tscn" id="4_giy5d"]
 [ext_resource type="Texture2D" uid="uid://cb33od821usim" path="res://scenes/ui/hud/IMG_0076.png" id="5_3icwf"]
-[ext_resource type="PackedScene" uid="uid://xohjhgf0dntr" path="res://scenes/enemies/enemy_mob.tscn" id="5_j7u6l"]
 [ext_resource type="Script" path="res://scenes/maps/experience_todo.gd" id="6_2pxxg"]
 [ext_resource type="PackedScene" uid="uid://d0o2mwqlwtfgc" path="res://scenes/ui/hud/hud_main.tscn" id="6_g2vry"]
+[ext_resource type="PackedScene" uid="uid://bfg2n1361d0kw" path="res://scenes/enemies/slime/BlueSlime.tscn" id="9_i5iwt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdno6"]
 size = Vector2(1259.5, 38)
@@ -108,7 +108,7 @@ position = Vector2(-1, 209)
 polygon = PackedVector2Array(462, -276, 498, -307, 538, -358, 597, -456, 634, -540, 653, -620, 665, -694, 667, -796, 651, -896, 622, -1003, 592, -1063, 537, -1153, 510, -1188, 455, -1243, 405, -1284, 335, -1328, 322, -1334, -225, -1334, -304, -1284, -342, -1255, -404, -1190, -445, -1137, -480, -1082, -513, -1014, -532, -968, -555, -874, -564, -786, -562, -693, -551, -614, -531, -540, -492, -445, -461, -394, -421, -336, -360, -273, -604, -271, -581, -1288, -572, -1404, -21, -1389, 360, -1400, 641, -1187, 766, -843, 719, -586, 686, -365, 694, -270, 458, -268)
 
 [node name="EnemyFactory" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_giy5d")]
-mob_to_spawn = ExtResource("5_j7u6l")
+mob_to_spawn = ExtResource("9_i5iwt")
 camera = NodePath("../Camera2D")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
