@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="psw-game-jam"
-run/main_scene="res://scenes/maps/main.tscn"
+run/main_scene="res://scenes/ui/hud/mainmenu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -28,6 +28,12 @@ window/stretch/mode="canvas_items"
 folder_colors={
 "res://resource/": "yellow"
 }
+
+[global_group]
+
+walls=""
+projectile=""
+aoe="weapon's duration based effect"
 
 [input]
 
@@ -64,5 +70,6 @@ move_right={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1vg0ederhg3f"]
+
+[ext_resource type="Script" path="res://scenes/equipment/weapons/weapon_base.gd" id="1_mfldb"]
+
+[node name="WeaponBase" type="Node2D"]
+script = ExtResource("1_mfldb")
+
+[node name="CooldownTimer" type="Timer" parent="." groups=["weapons"]]
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

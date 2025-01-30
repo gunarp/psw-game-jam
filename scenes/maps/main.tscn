@@ -1,59 +1,171 @@
-[gd_scene load_steps=9 format=3 uid="uid://ct7vpkc07hvkt"]
+[gd_scene load_steps=15 format=3 uid="uid://c2bjkp73pcdkr"]
 
 [ext_resource type="Script" path="res://scenes/maps/main.gd" id="1_e7vnp"]
-[ext_resource type="Texture2D" uid="uid://ccfrwaqh1p5g0" path="res://resource/map/map2.png" id="2_ej86i"]
+[ext_resource type="Texture2D" uid="uid://clb5byrsj7ye8" path="res://resource/map/map3.png" id="2_xpte1"]
 [ext_resource type="PackedScene" uid="uid://doso4hrh01chk" path="res://scenes/ui/hud/HealthBar.tscn" id="3_5preq"]
 [ext_resource type="PackedScene" uid="uid://o8hpxmhcss7m" path="res://scenes/player/player.tscn" id="3_lx56x"]
 [ext_resource type="PackedScene" uid="uid://ckir6u1c1v46w" path="res://scenes/utils/EnemySpawner.tscn" id="4_giy5d"]
-[ext_resource type="PackedScene" uid="uid://xohjhgf0dntr" path="res://scenes/enemies/enemy_mob.tscn" id="5_j7u6l"]
+[ext_resource type="Texture2D" uid="uid://cb33od821usim" path="res://scenes/ui/hud/IMG_0076.png" id="5_3icwf"]
+[ext_resource type="Script" path="res://scenes/maps/experience_todo.gd" id="6_2pxxg"]
 [ext_resource type="PackedScene" uid="uid://d0o2mwqlwtfgc" path="res://scenes/ui/hud/hud_main.tscn" id="6_g2vry"]
+[ext_resource type="PackedScene" uid="uid://bfg2n1361d0kw" path="res://scenes/enemies/slime/BlueSlime.tscn" id="9_i5iwt"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdno6"]
-size = Vector2(1259.5, 38)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bu05y"]
+size = Vector2(86.3565, 15.5567)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efaww"]
+size = Vector2(136.203, 77.2881)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_olrja"]
+size = Vector2(874, 1022)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnktl"]
+size = Vector2(870, 1024)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pfs5"]
+size = Vector2(1415, 1164)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_e7vnp")
 
 [node name="Brain" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
-texture = ExtResource("2_ej86i")
+texture = ExtResource("2_xpte1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(1.5, 1.5)
 
 [node name="HudMain" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_g2vry")]
 player = NodePath("../Player")
+
+[node name="Control" type="Control" parent="HudMain"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -319.0
+offset_top = -241.0
+offset_right = -279.0
+offset_bottom = -201.0
+
+[node name="TextureRect" type="TextureRect" parent="HudMain/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -4.075
+anchor_top = 1.8
+anchor_right = -3.075
+anchor_bottom = 2.8
+offset_right = 2560.0
+offset_bottom = 1920.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+mouse_filter = 0
+texture = ExtResource("5_3icwf")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="HealthBar" parent="HudMain" node_paths=PackedStringArray("entity_health") instance=ExtResource("3_5preq")]
 entity_health = NodePath("../../Player/Parameters/Health")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("3_lx56x")]
-scale = Vector2(1.5, 1.5)
+
+[node name="Experience-todo" parent="Player/Parameters" index="1"]
+script = ExtResource("6_2pxxg")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
 [node name="Walls" type="Node" parent="."]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls" groups=["walls"]]
 position = Vector2(1, -209)
 collision_mask = 62
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
-visibility_layer = 512
-position = Vector2(6, 75)
-shape = SubResource("RectangleShape2D_gdno6")
-debug_color = Color(1, 0.00965185, 0.0342356, 0.42)
+[node name="CollisionLungs" type="CollisionPolygon2D" parent="Walls/StaticBody2D"]
+polygon = PackedVector2Array(-604, 257, -638, 254, -680, 241, -717, 220, -753, 203, -814, 95, -865, 35, -901, 12, -937, 17, -958, 39, -973, 68, -985, 103, -988, 138, -989, 179, -1000, 183, -1021, 174, -1036, 158, -1053, 159, -1064, 168, -1087, 168, -1114, 159, -1126, 162, -1154, 181, -1174, 179, -1179, 93, -1201, 45, -1227, 20, -1251, 15, -1278, 21, -1322, 65, -1367, 130, -1403, 201, -1430, 263, -1465, 346, -1486, 407, -1508, 501, -1522, 555, -1527, 772, -1519, 853, -1497, 914, -1474, 954, -1456, 976, -1431, 992, -1249, 991, -1190, 978, -1144, 952, -1132, 941, -1123, 805, -1122, 642, -1129, 546, -1127, 395, -1132, 345, -1156, 294, -1166, 279, -1148, 261, -1120, 251, -1093, 248, -1084, 256, -1072, 253, -1056, 248, -1029, 256, -1007, 270, -995, 281, -1010, 302, -1019, 322, -1032, 343, -1037, 381, -1038, 461, -1034, 544, -1044, 678, -1043, 773, -1040, 859, -1034, 922, -1031, 941, -1007, 962, -972, 979, -884, 996, -784, 995, -721, 993, -692, 964, -668, 916, -644, 851, -630, 742, -640, 571, -648, 523, -685, 380, -703, 337, -684, 324, -660, 314, -611, 311, -604, 310, -604, 581, -610, 1063, -990, 1090, -1391, 1073, -1631, 989, -1613, 717, -1571, 467, -1490, 286, -1382, 62, -1258, -45, -1125, 56, -1113, 113, -1004, 49, -930, -36, -729, 89, -604, -72, -605, 226)
 
-[node name="Polygon2D" type="Polygon2D" parent="Walls/StaticBody2D"]
-polygon = PackedVector2Array(-626, 55, -625, 94, 633, 95, 633, 55)
+[node name="CollisionHeart" type="CollisionPolygon2D" parent="Walls/StaticBody2D"]
+position = Vector2(-1, 209)
+polygon = PackedVector2Array(-19, 372, -20, 746, -17, 786, -29, 750, -45, 717, -91, 621, -131, 559, -178, 497, -218, 454, -264, 409, -316, 390, -353, 390, -386, 393, -429, 409, -459, 441, -489, 469, -504, 503, -538, 565, -557, 647, -554, 714, -540, 800, -518, 852, -427, 967, -389, 1005, -344, 1047, -258, 1106, -147, 1198, -88, 1239, -6, 1297, 2, 1300, 199, 1153, 334, 1053, 453, 941, 536, 811, 547, 763, 559, 664, 543, 579, 505, 499, 480, 459, 406, 399, 369, 390, 318, 391, 223, 454, 134, 566, 97, 616, 72, 674, 46, 725, 29, 750, 20, 785, 18, 790, 20, 374, 695, 375, 636, 538, 525, 1318, -616, 1468, -601, 372)
+
+[node name="CollisionStomach" type="CollisionPolygon2D" parent="Walls/StaticBody2D"]
+position = Vector2(-1, 209)
+polygon = PackedVector2Array(692, 104, 819, 109, 864, 117, 899, 117, 947, 112, 976, 103, 1006, 102, 1009, 132, 1007, 174, 998, 218, 981, 259, 948, 303, 918, 331, 901, 344, 822, 353, 792, 368, 735, 418, 699, 459, 682, 503, 682, 537, 687, 567, 713, 597, 789, 667, 857, 715, 940, 770, 981, 787, 1013, 782, 1032, 755, 1065, 707, 1065, 686, 1053, 662, 1028, 645, 977, 613, 914, 577, 882, 557, 848, 530, 839, 504, 858, 477, 881, 477, 921, 501, 959, 521, 1014, 555, 1048, 573, 1107, 609, 1171, 655, 1202, 684, 1257, 684, 1316, 668, 1357, 646, 1430, 591, 1456, 554, 1505, 484, 1519, 442, 1544, 313, 1548, 245, 1553, 109, 1547, 32, 1531, -22, 1484, -94, 1444, -126, 1386, -167, 1352, -173, 1269, -179, 1198, -173, 1145, -164, 1100, -147, 1032, -98, 998, -71, 987, -57, 956, -72, 914, -84, 859, -86, 817, -81, 757, -65, 741, -60, 717, -60, 694, -53, 695, -272, 1251, -257, 1584, -216, 1730, -4, 1701, 320, 1555, 600, 1324, 764, 1127, 826, 873, 895, 646, 690, 663, 456, 694, 397)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/StaticBody2D"]
+position = Vector2(-1, 209)
+polygon = PackedVector2Array(462, -276, 498, -307, 538, -358, 597, -456, 634, -540, 653, -620, 665, -694, 667, -796, 651, -896, 622, -1003, 592, -1063, 537, -1153, 510, -1188, 455, -1243, 405, -1284, 335, -1328, 322, -1334, -225, -1334, -304, -1284, -342, -1255, -404, -1190, -445, -1137, -480, -1082, -513, -1014, -532, -968, -555, -874, -564, -786, -562, -693, -551, -614, -531, -540, -492, -445, -461, -394, -421, -336, -360, -273, -604, -271, -581, -1288, -572, -1404, -21, -1389, 360, -1400, 641, -1187, 766, -843, 719, -586, 686, -365, 694, -270, 458, -268)
 
 [node name="EnemyFactory" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_giy5d")]
-spawn_timeout = 1
-mob_to_spawn = ExtResource("5_j7u6l")
-mob_scale = Vector2(0.5, 0.5)
+mob_to_spawn = ExtResource("9_i5iwt")
 camera = NodePath("../Camera2D")
 
-[connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
+bus = &"Music"
 
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -2
+offset_left = -1994.0
+offset_top = -1477.0
+offset_right = 1764.0
+offset_bottom = 1553.0
+color = Color(0, 0, 0, 1)
+
+[node name="RegionNotifiers" type="Node" parent="."]
+
+[node name="MainRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
+collision_mask = 2
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/MainRegion"]
+position = Vector2(50, 60)
+scale = Vector2(14.1738, 35.0974)
+shape = SubResource("RectangleShape2D_bu05y")
+
+[node name="HeartRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
+collision_mask = 2
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/HeartRegion"]
+position = Vector2(-8.5, 833)
+scale = Vector2(8.48, 11.8)
+shape = SubResource("RectangleShape2D_efaww")
+
+[node name="LungRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
+collision_mask = 2
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/LungRegion"]
+position = Vector2(-1092, 300)
+shape = SubResource("RectangleShape2D_olrja")
+
+[node name="StomatchRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
+collision_mask = 2
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/StomatchRegion"]
+position = Vector2(1152, 251)
+shape = SubResource("RectangleShape2D_mnktl")
+
+[node name="BrainRegion" type="Area2D" parent="RegionNotifiers"]
+collision_layer = 0
+collision_mask = 2
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/BrainRegion"]
+position = Vector2(13.5, -849)
+shape = SubResource("RectangleShape2D_2pfs5")
+
+[connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
+[connection signal="area_entered" from="RegionNotifiers/MainRegion" to="." method="_on_region_entered" binds= ["main"]]
+[connection signal="area_entered" from="RegionNotifiers/HeartRegion" to="." method="_on_region_entered" binds= ["heart"]]
+[connection signal="area_entered" from="RegionNotifiers/LungRegion" to="." method="_on_region_entered" binds= ["lung"]]
+[connection signal="area_entered" from="RegionNotifiers/StomatchRegion" to="." method="_on_region_entered" binds= ["stomach"]]
+[connection signal="area_entered" from="RegionNotifiers/BrainRegion" to="." method="_on_region_entered" binds= ["brain"]]
+
+[editable path="HudMain"]
 [editable path="Player"]

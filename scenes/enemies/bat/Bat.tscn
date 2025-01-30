@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://cweohe2e45fnc"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy_entity.gd" id="1_xy5la"]
+[ext_resource type="Texture2D" uid="uid://bx6gpc5w8tcf2" path="res://resource/enemies/bat.png" id="2_3p4pr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrho2"]
+atlas = ExtResource("2_3p4pr")
+region = Rect2(0, 3, 28, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljhyk"]
+atlas = ExtResource("2_3p4pr")
+region = Rect2(30, 3, 28, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f7k6"]
+atlas = ExtResource("2_3p4pr")
+region = Rect2(60, 3, 28, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_73sov"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrho2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljhyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f7k6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tq8qi"]
+radius = 3.0
+height = 12.0
+
+[node name="BatVisual" type="RigidBody2D"]
+script = ExtResource("1_xy5la")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_73sov")
+frame = 2
+frame_progress = 0.943379
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_tq8qi")

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://0j2mh5fpys7e"]
+
+[ext_resource type="Script" path="res://scenes/equipment/weapons/guns/needle/needle_projectile.gd" id="1_ehfu0"]
+[ext_resource type="Shape2D" uid="uid://2cfgtv8vujum" path="res://scenes/equipment/weapons/guns/needle/needle_hitbox.tres" id="2_i6it2"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c2yxx"]
+
+[node name="NeedleProjectile" type="CharacterBody2D" groups=["projectile"]]
+collision_layer = 4
+collision_mask = 41
+script = ExtResource("1_ehfu0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8.5, 0.5)
+shape = ExtResource("2_i6it2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8.50725, 0.513312)
+rotation = -3.14159
+scale = Vector2(16.962, -0.990754)
+texture = SubResource("PlaceholderTexture2D_c2yxx")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
