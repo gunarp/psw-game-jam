@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnfqh4ynpkuqy"]
+
+[ext_resource type="Script" path="res://scenes/utils/loot.gd" id="1_3yl4h"]
+[ext_resource type="Texture2D" uid="uid://ctob5sq1c05bo" path="res://resource/player/playerGrey_walk1.png" id="2_p60o8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ijgmc"]
+radius = 12.0
+
+[node name="ExpDrop" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_3yl4h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_p60o8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ijgmc")
