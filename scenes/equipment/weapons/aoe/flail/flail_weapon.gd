@@ -9,6 +9,7 @@ var inherent_scale: float = 1
 func start(_player_ref: PlayerEntity, _base_stats: WeaponBaseStats):
   base_stats = _base_stats
   player_ref = _player_ref
+  _player_ref.get_player_stats().connect("stats_changed", _on_player_stats_changed)
 
 
 func level_up():
