@@ -18,10 +18,8 @@ extends Node
 
 var current_region: String
 
-
 func _on_player_player_died() -> void:
 	print("Game Over :(")
-
 
 func _on_region_entered(_area: Area2D, entered_region: String) -> void:
 	print("entered ", entered_region)

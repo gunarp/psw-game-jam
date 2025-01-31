@@ -22,7 +22,3 @@ func level_up():
 	level +=  1 # Increase the level
 	experience_to_level = int(experience_to_level*1.5) # Increase required xp for next lvl up
 	print("Leveled up! Current level: ", level)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

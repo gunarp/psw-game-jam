@@ -127,4 +127,3 @@ func get_attack_multiplier() -> float:
 func get_player_stats() -> PlayerStats:
 	return $Parameters/PlayerAttackStats
 #endregion
-
