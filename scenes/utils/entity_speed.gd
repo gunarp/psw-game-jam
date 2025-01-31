@@ -5,8 +5,8 @@ class_name EntitySpeed
 var speed: Vector2
 
 func set_speed(s: float):
-	self.speed = Vector2(s, 0)
+  self.speed = Vector2(s, 0)
 
-	
+  
 func get_velocity(direction: Vector2) -> Vector2:
-	return speed.rotated(direction.angle())
+  return speed.rotated(direction.angle())

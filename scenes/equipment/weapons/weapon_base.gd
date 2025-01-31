@@ -14,33 +14,33 @@ var weapon_kind: WEAPON_KIND
 @onready var stats: WeaponBaseStats = WeaponBaseStats.new()
 
 func initialize(_player_ref: PlayerEntity, _weapon: PackedScene) -> void:
-	self.player_ref = _player_ref
-	self.weapon_recipe = _weapon
+  self.player_ref = _player_ref
+  self.weapon_recipe = _weapon
 
-	var weapon_group = weapon_recipe.get_state().get_node_groups(0)
-	if ("projectile" in weapon_group):
-		weapon_kind = WEAPON_KIND.projectile
-		$CooldownTimer.start(stats.cooldown)
-	elif ("aoe" in weapon_group):
-		weapon_kind = WEAPON_KIND.aoe
-		var aoe_weapon = weapon_recipe.instantiate()
-		add_child(aoe_weapon)
-		aoe_weapon.start(player_ref, stats)
-	else:
-		weapon_kind = WEAPON_KIND.melee
+  var weapon_group = weapon_recipe.get_state().get_node_groups(0)
+  if ("projectile" in weapon_group):
+    weapon_kind = WEAPON_KIND.projectile
+    $CooldownTimer.start(stats.cooldown)
+  elif ("aoe" in weapon_group):
+    weapon_kind = WEAPON_KIND.aoe
+    var aoe_weapon = weapon_recipe.instantiate()
+    add_child(aoe_weapon)
+    aoe_weapon.start(player_ref, stats)
+  else:
+    weapon_kind = WEAPON_KIND.melee
 
 
 func update_cooldown(_cooldown: float) -> void:
-	$CooldownTimer.stop()
-	stats.cooldown = _cooldown
-	$CooldownTimer.start(stats.cooldown)
+  $CooldownTimer.stop()
+  stats.cooldown = _cooldown
+  $CooldownTimer.start(stats.cooldown)
 
 
 func level_up() -> void:
-	stats.level += 1
+  stats.level += 1
 
 
 func _on_cooldown_timer_timeout() -> void:
-	var projectile = weapon_recipe.instantiate()
-	projectile.start(player_ref, stats)
-	get_tree().root.add_child(projectile)
+  var projectile = weapon_recipe.instantiate()
+  projectile.start(player_ref, stats)
+  get_tree().root.add_child(projectile)

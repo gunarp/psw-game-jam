@@ -11,10 +11,10 @@ func _ready():
 	# General button functionality then specific button
 	play_button.pressed.connect(Callable(self, "_on_button_pressed"))
 	play_button.pressed.connect(Callable(self, "_on_play_button_pressed"))
-	
+
 	settings_button.pressed.connect(Callable(self, "_on_button_pressed"))
 	settings_button.pressed.connect(Callable(self, "_on_settings_button_pressed"))
-	
+
 	quit_button.pressed.connect(Callable(self, "_on_button_pressed"))
 	quit_button.pressed.connect(Callable(self, "_on_quit_button_pressed"))
 
@@ -27,16 +27,16 @@ func _on_play_button_pressed():
 func _on_settings_button_pressed():
 	var settings_scene = preload("res://scenes/ui/settingsmenu.tscn")
 	var settings_instance = settings_scene.instantiate()
-	get_tree().current_scene.add_child(settings_instance) 
-	
+	get_tree().current_scene.add_child(settings_instance)
+
 # Function to quit the game
 func _on_quit_button_pressed():
 	get_tree().quit()
-	
+
 # Common function for all button clicks
 func _on_button_pressed():
 	sfx_audio_player.play()
-	
+
 	audio_player = $AudioStreamPlayer
 	audio_player.stream = menu_music
 	audio_player.play()
