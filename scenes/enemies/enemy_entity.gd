@@ -22,6 +22,8 @@ class_name EnemyEntity
 ## This should probalby be in another class
 @export var stats_experience_dropped: int = 10
 
+@export var is_boss: bool = false
+
 @export_group("Animation Properties")
 @export var should_flip: bool = false
 
@@ -130,7 +132,8 @@ func _set_is_playing(playing: bool) -> void:
 
 
 func _on_screen_exit() -> void:
-  despawn_timer.start(stats_despawn_delay_s)
+  if (!is_boss):
+    despawn_timer.start(stats_despawn_delay_s)
 
 
 func _on_screen_enter() -> void:
