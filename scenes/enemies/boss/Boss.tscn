@@ -24,7 +24,9 @@ height = 105.0
 
 [node name="Boss" type="RigidBody2D"]
 script = ExtResource("1_sy6lf")
-stats_health = 100.0
+stats_speed = 60.0
+stats_health = 500.0
+stats_damage_per_second = 20.0
 is_boss = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
