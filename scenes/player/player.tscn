@@ -48,7 +48,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xphs8"]
-radius = 25.0
+radius = 50.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -93,3 +93,4 @@ shape = SubResource("CircleShape2D_xphs8")
 [connection signal="body_entered" from="HurtBox" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="HurtBox" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
+[connection signal="body_entered" from="PickupCircle" to="." method="_on_pickup_circle_body_entered"]

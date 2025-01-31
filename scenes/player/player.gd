@@ -130,3 +130,9 @@ func get_attack_multiplier() -> float:
 func get_player_stats() -> PlayerStats:
   return $Parameters/PlayerAttackStats
 #endregion
+
+func _on_pickup_circle_body_entered(body: Node2D) -> void:
+  print("exp gathered!")
+  if body is Loot:
+    $Parameters/Experience.on_exp_gather(body.exp_val)
+    body.on_player_collision()

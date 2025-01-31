@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 class_name Loot
-#var loot_to_spawn: PackedScene
+var exp_val: int = 5
 
 ## Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
@@ -16,5 +16,5 @@ func _physics_process(_delta: float) -> void:
   pass
   
 func on_player_collision() -> void:
-  queue_free()
+  self.queue_free()
   pass

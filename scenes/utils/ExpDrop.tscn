@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnfqh4ynpkuqy"]
+[gd_scene load_steps=4 format=3 uid="uid://dp3ca6t8aqoe1"]
 
 [ext_resource type="Script" path="res://scenes/utils/loot.gd" id="1_3yl4h"]
 [ext_resource type="Texture2D" uid="uid://ctob5sq1c05bo" path="res://resource/player/playerGrey_walk1.png" id="2_p60o8"]
