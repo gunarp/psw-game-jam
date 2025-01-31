@@ -9,6 +9,7 @@ script = ExtResource("1_kao2b")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(640, 480)
+layout_mode = 0
 offset_right = 640.0
 offset_bottom = 480.0
 

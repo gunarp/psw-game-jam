@@ -70,14 +70,11 @@ mouse_filter = 0
 texture = ExtResource("5_3icwf")
 metadata/_edit_use_anchors_ = true
 
-[node name="Pause" type="Button" parent="CanvasLayer/Control/TextureRect"]
-visible = false
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 0
-offset_left = 2332.0
-offset_top = 36.0
-offset_right = 2350.0
-offset_bottom = 54.0
+[node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = -182.0
+offset_top = 205.0
+offset_right = 118.0
+offset_bottom = 232.0
 
 [node name="Walls" type="Node" parent="."]
 

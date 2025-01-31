@@ -1,11 +1,11 @@
 extends Node
 
 @onready var tracks = {
-  "main": load("res://resource/music/cacophony.ogg"),
+  "main": load("res://resource/music/ontogenesis.ogg"),
   "heart": load("res://resource/music/cardialgia.ogg"),
-  "stomach": load("res://resource/music/sphygmomanometer.ogg"),
-  "lung": load("res://resource/music/cacophony.ogg"),
-  "brain": load("res://resource/music/cacophony.ogg"),
+  "stomach": load("res://resource/music/sphygmomanometer_2.ogg"),
+  "lung": load("res://resource/music/cacophony_2.ogg"),
+  "brain": load("res://resource/music/terminal.ogg"),
 }
 
 @onready var enemy_to_spawn = {
