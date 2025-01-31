@@ -139,6 +139,7 @@ func _on_pickup_circle_body_entered(body: Node2D) -> void:
 @onready var equipped_weapons = {}
 
 func _on_upgrade_level_up(upgrade_name: String) -> void:
+  print(upgrade_name)
   # get the resource associated with this upgrade name
   if upgrade_name in weapon_scene_paths:
     if upgrade_name not in equipped_weapons:

@@ -8,13 +8,14 @@
 [ext_resource type="Texture2D" uid="uid://cb33od821usim" path="res://scenes/ui/hud/IMG_0076.png" id="5_3icwf"]
 [ext_resource type="Script" path="res://scenes/maps/hud_overlay.gd" id="5_fs1tj"]
 [ext_resource type="PackedScene" uid="uid://d0o2mwqlwtfgc" path="res://scenes/ui/hud/hud_main.tscn" id="6_g2vry"]
+[ext_resource type="Script" path="res://scenes/ui/hud/experience_bar.gd" id="7_0lwaj"]
 [ext_resource type="PackedScene" uid="uid://5y1x0jkfpa6r" path="res://scenes/maps/pois/KeyHalf.tscn" id="7_83mnq"]
-[ext_resource type="Script" path="res://scenes/ui/hud/experience_bar.gd" id="7_nxcxx"]
 [ext_resource type="PackedScene" uid="uid://bfg2n1361d0kw" path="res://scenes/enemies/slime/BlueSlime.tscn" id="9_i5iwt"]
 [ext_resource type="PackedScene" uid="uid://vhjco0eclddd" path="res://scenes/maps/RoomHeart/RoomHeart.tscn" id="9_j4fmd"]
 [ext_resource type="PackedScene" uid="uid://b1d5meiymrqgh" path="res://scenes/maps/RoomStomach/RoomStomatch.tscn" id="10_h1pcw"]
 [ext_resource type="Script" path="res://scenes/maps/premade_slime_container.gd" id="10_ucvct"]
 [ext_resource type="PackedScene" uid="uid://n1l17idufobi" path="res://scenes/ui/PlayerDeathScreen.tscn" id="15_hmk0f"]
+[ext_resource type="PackedScene" uid="uid://dqvub3tqhj8ye" path="res://scenes/level_up_ui.tscn" id="13_g57gn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrkbm"]
 size = Vector2(1291, 65)
@@ -63,6 +64,7 @@ offset_right = -279.0
 offset_bottom = -201.0
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 offset_right = 2560.0
@@ -74,14 +76,21 @@ mouse_filter = 0
 texture = ExtResource("5_3icwf")
 metadata/_edit_use_anchors_ = true
 
-[node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("player_experience")]
-offset_left = -182.0
-offset_top = 205.0
-offset_right = 118.0
-offset_bottom = 232.0
-show_percentage = false
-script = ExtResource("7_nxcxx")
-player_experience = NodePath("../../Player/Parameters/Experience")
+[node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer/Control" node_paths=PackedStringArray("player_experience")]
+layout_mode = 0
+offset_left = 493.0
+offset_top = 676.0
+offset_right = 793.0
+offset_bottom = 703.0
+script = ExtResource("7_0lwaj")
+player_experience = NodePath("../../../Player/Parameters/Experience")
+
+[node name="LevelUpUI" parent="CanvasLayer/Control" instance=ExtResource("13_g57gn")]
+offset_left = 2.0
+offset_top = 10.0
+offset_right = 2.0
+offset_bottom = 10.0
+option_scenes = Array[PackedScene]([])
 
 [node name="Walls" type="Node" parent="."]
 
@@ -377,6 +386,7 @@ offset_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[connection signal="upgrade_selected" from="CanvasLayer/Control/LevelUpUI" to="Player" method="_on_upgrade_level_up"]
 [connection signal="area_entered" from="RegionNotifiers/MainRegion" to="." method="_on_region_entered" binds= ["main"]]
 [connection signal="area_entered" from="RegionNotifiers/HeartRegion" to="." method="_on_region_entered" binds= ["heart"]]
 [connection signal="area_entered" from="RegionNotifiers/LungRegion" to="." method="_on_region_entered" binds= ["lung"]]
@@ -388,7 +398,7 @@ grow_vertical = 2
 [connection signal="picked_up_key" from="Rooms/RoomStomatch/BlueKey" to="." method="_on_key_pickup" binds= ["blue"]]
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
 [connection signal="exp_level_up" from="Player/Parameters/Experience" to="." method="_on_level_up"]
-[connection signal="exp_level_up" from="Player/Parameters/Experience" to="CanvasLayer/ExperienceBar" method="_on_level_up"]
+[connection signal="exp_level_up" from="Player/Parameters/Experience" to="CanvasLayer/Control/LevelUpUI" method="_on_experience_exp_level_up"]
 
 [editable path="HudMain"]
 [editable path="Rooms/RoomHeart"]
