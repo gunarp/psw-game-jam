@@ -27,12 +27,14 @@ func _on_player_player_died() -> void:
   get_tree().paused = true
   $PlayerDeathScreen.visible = true
 
+
 func _on_level_up(_new_max: float) -> void:
   # get_tree().paused = true
   pass
 
 
-func _on_unpause() -> void:
+func _on_unpause(_unused: String) -> void:
+  # get_tree().paused = false
   pass
 
 
