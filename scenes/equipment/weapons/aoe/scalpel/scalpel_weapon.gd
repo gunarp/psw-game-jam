@@ -20,6 +20,11 @@ func start(_player_ref: PlayerEntity, _base_stats: WeaponBaseStats):
   _deploy_children()
 
 
+func level_up():
+  attacks_per_second += 2
+  inherent_scale += 0.1
+
+
 func _deploy_children():
   scale = base_stats.scale * player_ref.get_player_stats().scale_multiplier * inherent_scale
 

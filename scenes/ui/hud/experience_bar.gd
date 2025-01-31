@@ -3,8 +3,8 @@ extends ProgressBar
 @export var player_experience: EntityExperience
 
 func _ready() -> void:
-  value = player_experience.current_experience
-  max_value = player_experience.level_up_threshhold
+  value = 0
+  max_value = 50
 
 
 func _process(_delta: float) -> void:

@@ -38,6 +38,10 @@ func update_cooldown(_cooldown: float) -> void:
 
 func level_up() -> void:
   stats.level += 1
+  if stats.level % 2 == 0:
+    stats.attack_power += 2.5
+  else:
+    stats.cooldown -= 0.05
 
 
 func _on_cooldown_timer_timeout() -> void:

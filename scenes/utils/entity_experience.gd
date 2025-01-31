@@ -2,8 +2,8 @@ extends Node
 
 class_name EntityExperience
 @onready var level: int = 0
-@onready var current_experience: int
-@onready var total_experience: int
+@onready var current_experience: int = 0
+@onready var total_experience: int = 0
 
 @onready var exp_per_level = [50, 100, 100, 300, 300, 500, 500]
 @onready var level_up_threshhold: int = 50
