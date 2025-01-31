@@ -18,7 +18,7 @@ extends Node
 
 var current_region: String
 @onready var obtained_keys = {}
-const num_keys_to_obtain = 1
+const num_keys_to_obtain = 4
 
 func _on_player_player_died() -> void:
   print("Game Over :(")

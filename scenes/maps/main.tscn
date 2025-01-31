@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c2bjkp73pcdkr"]
+[gd_scene load_steps=21 format=3 uid="uid://c2bjkp73pcdkr"]
 
 [ext_resource type="Script" path="res://scenes/maps/main.gd" id="1_e7vnp"]
 [ext_resource type="Texture2D" uid="uid://clb5byrsj7ye8" path="res://resource/map/map3.png" id="2_xpte1"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://d0o2mwqlwtfgc" path="res://scenes/ui/hud/hud_main.tscn" id="6_g2vry"]
 [ext_resource type="PackedScene" uid="uid://5y1x0jkfpa6r" path="res://scenes/maps/pois/KeyHalf.tscn" id="7_83mnq"]
 [ext_resource type="PackedScene" uid="uid://bfg2n1361d0kw" path="res://scenes/enemies/slime/BlueSlime.tscn" id="9_i5iwt"]
+[ext_resource type="PackedScene" uid="uid://vhjco0eclddd" path="res://scenes/maps/RoomHeart/RoomHeart.tscn" id="9_j4fmd"]
 [ext_resource type="PackedScene" uid="uid://ct2rxkgn055lv" path="res://scenes/maps/pois/Key.tscn" id="10_wuk8i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrkbm"]
@@ -113,7 +114,7 @@ scale = Vector2(1290, 67)
 texture = SubResource("PlaceholderTexture2D_qnfex")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -5.0
+volume_db = -10.0
 bus = &"Music"
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -132,6 +133,7 @@ collision_mask = 2
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/MainRegion"]
+visible = false
 position = Vector2(50, 60)
 scale = Vector2(14.1738, 35.0974)
 shape = SubResource("RectangleShape2D_bu05y")
@@ -142,6 +144,7 @@ collision_mask = 2
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/HeartRegion"]
+visible = false
 position = Vector2(-8.5, 833)
 scale = Vector2(8.48, 11.8)
 shape = SubResource("RectangleShape2D_efaww")
@@ -152,6 +155,7 @@ collision_mask = 2
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/LungRegion"]
+visible = false
 position = Vector2(-1092, 300)
 shape = SubResource("RectangleShape2D_olrja")
 
@@ -161,6 +165,7 @@ collision_mask = 2
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/StomatchRegion"]
+visible = false
 position = Vector2(1152, 251)
 shape = SubResource("RectangleShape2D_mnktl")
 
@@ -170,17 +175,11 @@ collision_mask = 2
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/BrainRegion"]
+visible = false
 position = Vector2(58.5, -814)
 shape = SubResource("RectangleShape2D_2pfs5")
 
 [node name="RoomPOIs" type="Node" parent="."]
-
-[node name="RoomHeart" type="Node" parent="RoomPOIs"]
-
-[node name="KeyRed" parent="RoomPOIs/RoomHeart" instance=ExtResource("10_wuk8i")]
-position = Vector2(1, 952)
-collision_layer = 128
-collision_mask = 2
 
 [node name="RoomStomach" type="Node" parent="RoomPOIs"]
 
@@ -203,6 +202,42 @@ collision_layer = 128
 collision_mask = 2
 half_selection = 1
 
+[node name="Rooms" type="Node" parent="."]
+
+[node name="RoomHeart" parent="Rooms" instance=ExtResource("9_j4fmd")]
+position = Vector2(0, 966)
+
+[node name="HeartPiece1" parent="Rooms/RoomHeart" index="1"]
+position = Vector2(-301, -209)
+
+[node name="Sprite2D" parent="Rooms/RoomHeart/HeartPiece1" index="0"]
+scale = Vector2(2, 2)
+
+[node name="CollisionPolygon2D" parent="Rooms/RoomHeart/HeartPiece1" index="1"]
+scale = Vector2(2, 2)
+
+[node name="HeartPiece2" parent="Rooms/RoomHeart" index="2"]
+position = Vector2(340, -339)
+
+[node name="Sprite2D" parent="Rooms/RoomHeart/HeartPiece2" index="0"]
+scale = Vector2(2, 2)
+
+[node name="CollisionPolygon2D" parent="Rooms/RoomHeart/HeartPiece2" index="1"]
+scale = Vector2(2, 2)
+
+[node name="HeartPiece3" parent="Rooms/RoomHeart" index="3"]
+position = Vector2(53, 178)
+
+[node name="Sprite2D" parent="Rooms/RoomHeart/HeartPiece3" index="0"]
+scale = Vector2(2, 2)
+
+[node name="CollisionPolygon2D" parent="Rooms/RoomHeart/HeartPiece3" index="1"]
+scale = Vector2(2, 2)
+
+[node name="KeyRed" parent="Rooms/RoomHeart" index="4"]
+collision_layer = 128
+collision_mask = 2
+
 [node name="Player" parent="." groups=["player"] instance=ExtResource("3_lx56x")]
 collision_mask = 1
 metadata/_edit_lock_ = true
@@ -222,11 +257,13 @@ camera = NodePath("../Camera2D")
 [connection signal="area_entered" from="RegionNotifiers/LungRegion" to="." method="_on_region_entered" binds= ["lung"]]
 [connection signal="area_entered" from="RegionNotifiers/StomatchRegion" to="." method="_on_region_entered" binds= ["stomach"]]
 [connection signal="area_entered" from="RegionNotifiers/BrainRegion" to="." method="_on_region_entered" binds= ["brain"]]
-[connection signal="picked_up_key" from="RoomPOIs/RoomHeart/KeyRed" to="." method="_on_key_pickup" binds= ["red"]]
 [connection signal="picked_up_key" from="RoomPOIs/RoomStomach/KeyBlue" to="." method="_on_key_pickup" binds= ["blue"]]
 [connection signal="picked_up_key" from="RoomPOIs/RoomLung/KeyGreenLeft" to="." method="_on_key_pickup" binds= ["green_left"]]
 [connection signal="picked_up_key" from="RoomPOIs/RoomLung/KeyGreenRight" to="." method="_on_key_pickup" binds= ["green_right"]]
+[connection signal="picked_up_key" from="Rooms/RoomHeart/KeyRed" to="." method="_on_key_pickup" binds= ["red"]]
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
 
 [editable path="HudMain"]
+[editable path="Rooms/RoomHeart"]
+[editable path="Rooms/RoomHeart/KeyRed"]
 [editable path="Player"]
