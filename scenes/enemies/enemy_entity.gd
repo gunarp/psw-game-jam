@@ -42,6 +42,7 @@ var is_awake: bool = true
 const default_layer = 32
 const default_mask = 45
 
+signal game_won
 
 func _ready() -> void:
   despawn_timer.one_shot = true
@@ -101,6 +102,8 @@ func hit(_player_ref: PlayerEntity, attack_stats: WeaponBaseStats, attack_direct
   damage *= player_stats.attack_multiplier
 
   if (_apply_damage_is_dead(damage)):
+    if (is_boss):
+      game_won.emit()
     spawn_exp(self.global_position)
     queue_free()
   else:

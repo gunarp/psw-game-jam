@@ -24,7 +24,8 @@ const num_keys_to_obtain = 4
 
 func _on_player_player_died() -> void:
   print("Game Over :(")
-
+  get_tree().paused = true
+  $PlayerDeathScreen.visible = true
 
 func _on_level_up(_new_max: float) -> void:
   # get_tree().paused = true
