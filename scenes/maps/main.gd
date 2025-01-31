@@ -23,6 +23,16 @@ const num_keys_to_obtain = 4
 func _on_player_player_died() -> void:
   print("Game Over :(")
 
+
+func _on_level_up(_new_max: float) -> void:
+  # get_tree().paused = true
+  pass
+
+
+func _on_unpause() -> void:
+  pass
+
+
 func _on_region_entered(_area: Area2D, entered_region: String) -> void:
   print("entered ", entered_region)
 

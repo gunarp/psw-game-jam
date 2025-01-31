@@ -373,6 +373,7 @@ camera = NodePath("../Camera2D")
 [connection signal="picked_up_key" from="Rooms/RoomHeart/KeyRed" to="." method="_on_key_pickup" binds= ["red"]]
 [connection signal="picked_up_key" from="Rooms/RoomStomatch/BlueKey" to="." method="_on_key_pickup" binds= ["blue"]]
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
+[connection signal="exp_level_up" from="Player/Parameters/Experience" to="." method="_on_level_up"]
 [connection signal="exp_level_up" from="Player/Parameters/Experience" to="CanvasLayer/ExperienceBar" method="_on_level_up"]
 
 [editable path="HudMain"]
