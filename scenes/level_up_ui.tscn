@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dutom0jqfca0u"]
+[gd_scene load_steps=14 format=3 uid="uid://dqvub3tqhj8ye"]
 
 [ext_resource type="Script" path="res://scenes/maps/level_up_ui.gd" id="1_klw3x"]
 [ext_resource type="Texture2D" uid="uid://dk6dxl0lqk70i" path="res://resource/player/augment_icons.png" id="2_v3f5o"]

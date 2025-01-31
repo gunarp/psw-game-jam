@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://5y1x0jkfpa6r" path="res://scenes/maps/pois/KeyHalf.tscn" id="7_83mnq"]
 [ext_resource type="PackedScene" uid="uid://bfg2n1361d0kw" path="res://scenes/enemies/slime/BlueSlime.tscn" id="9_i5iwt"]
 [ext_resource type="PackedScene" uid="uid://ct2rxkgn055lv" path="res://scenes/maps/pois/Key.tscn" id="10_wuk8i"]
-[ext_resource type="PackedScene" uid="uid://dutom0jqfca0u" path="res://scenes/level_up_ui.tscn" id="13_g57gn"]
+[ext_resource type="PackedScene" uid="uid://dqvub3tqhj8ye" path="res://scenes/level_up_ui.tscn" id="13_g57gn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrkbm"]
 size = Vector2(1291, 65)
