@@ -5,7 +5,7 @@ class_name PlayerEntity
 signal player_died
 
 # TODO: make speed change with items
-var speed: int = 1000
+var speed: int = 200
 var prev_walking_direction: Vector2
 var walking_direction: Vector2
 var facing_direction: Vector2
@@ -81,7 +81,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
     damagePerSecond += body.get_dps()
   if body is KeyEntity:
     body.on_pickup()
-    pass
+  if body is Loot:
+    $Parameters/Experience.on_exp_gather(body.exp_val)
+    body.on_collected()
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
@@ -108,25 +110,56 @@ func _on_health_entity_health_depleted() -> void:
 
 #region Attack Subsystem -- refactorout later
 func _init_attack_subsystem():
-  var starting_weapon = weapon_base.instantiate() as WeaponBase
-  add_child(starting_weapon)
-  starting_weapon.level_up()
-  starting_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/mole/MoleProjectile.tscn"))
-
-  var t = weapon_base.instantiate() as WeaponBase
-  add_child(t)
-  t.level_up()
-  t.initialize(self, load("res://scenes/equipment/weapons/aoe/scalpel/ScalpelWeapon.tscn"))
-
-  var temp_weapon = weapon_base.instantiate() as WeaponBase
-  add_child(temp_weapon)
-  temp_weapon.level_up()
-  temp_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/needle/NeedleProjectile.tscn"))
+  _on_upgrade_level_up("needle")
 
 
 func get_attack_multiplier() -> float:
   return $Parameters/PlayerAttackStats.attack_multiplier
 
+
 func get_player_stats() -> PlayerStats:
   return $Parameters/PlayerAttackStats
 #endregion
+
+
+func _on_pickup_circle_body_entered(body: Node2D) -> void:
+  if body is Loot:
+    body.init_pickup(self)
+
+
+@onready var weapon_scene_paths = {
+  "mole": "res://scenes/equipment/weapons/guns/mole/MoleProjectile.tscn",
+  "scalpel": "res://scenes/equipment/weapons/aoe/scalpel/ScalpelWeapon.tscn",
+  "needle": "res://scenes/equipment/weapons/guns/needle/NeedleProjectile.tscn",
+  "flail": "res://scenes/equipment/weapons/aoe/flail/FlailWeapon.tscn",
+}
+
+@onready var augments = ["sugar", "mito", "atp", "ribos", "golgi"]
+
+@onready var equipped_weapons = {}
+
+func _on_upgrade_level_up(upgrade_name: String) -> void:
+  print(upgrade_name)
+  # get the resource associated with this upgrade name
+  if upgrade_name in weapon_scene_paths:
+    if upgrade_name not in equipped_weapons:
+      var w = weapon_base.instantiate() as WeaponBase
+      add_child(w)
+      w.initialize(self, load(weapon_scene_paths[upgrade_name]))
+      equipped_weapons[upgrade_name] = w
+    equipped_weapons[upgrade_name].level_up()
+  elif upgrade_name in augments:
+    match upgrade_name:
+      "sugar":
+        speed += 25
+      "mito":
+        $Parameters/PlayerAttackStats.attack_multiplier += 0.1
+        $Parameters/PlayerAttackStats.notify_stats_changed()
+      "atp":
+        $Parameters/PlayerAttackStats.cooldown_multiplier += 0.1
+        $Parameters/PlayerAttackStats.notify_stats_changed()
+      "ribos":
+        healingPerSecond += 0.5
+      "golgi":
+        $Parameters/PlayerAttackStats.scale_multiplier += 0.15
+        $Parameters/PlayerAttackStats.notify_stats_changed()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dqvub3tqhj8ye"]
+[gd_scene load_steps=15 format=3 uid="uid://dqvub3tqhj8ye"]
 
 [ext_resource type="Script" path="res://scenes/maps/level_up_ui.gd" id="1_klw3x"]
 [ext_resource type="Texture2D" uid="uid://dk6dxl0lqk70i" path="res://resource/player/augment_icons.png" id="2_v3f5o"]
 [ext_resource type="Texture2D" uid="uid://bi0lgekmtou7d" path="res://resource/weapons/weapons.png" id="3_2j0jo"]
 [ext_resource type="Texture2D" uid="uid://bqsgi1n0arg7t" path="res://resource/player/upgrade_ui.png" id="3_rcbrc"]
+[ext_resource type="Script" path="res://scenes/upgrade_option_button.gd" id="5_uebfd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cb3we"]
 atlas = ExtResource("3_2j0jo")
@@ -70,6 +71,7 @@ offset_bottom = 40.0
 
 [node name="Option1" type="Button" parent="IconContainer"]
 layout_mode = 2
+script = ExtResource("5_uebfd")
 
 [node name="TextureRect" type="TextureRect" parent="IconContainer/Option1"]
 layout_mode = 0
@@ -81,6 +83,7 @@ expand_mode = 1
 
 [node name="Option2" type="Button" parent="IconContainer"]
 layout_mode = 2
+script = ExtResource("5_uebfd")
 
 [node name="TextureRect" type="TextureRect" parent="IconContainer/Option2"]
 layout_mode = 0
@@ -92,6 +95,7 @@ expand_mode = 1
 
 [node name="Option3" type="Button" parent="IconContainer"]
 layout_mode = 2
+script = ExtResource("5_uebfd")
 
 [node name="TextureRect" type="TextureRect" parent="IconContainer/Option3"]
 layout_mode = 0
