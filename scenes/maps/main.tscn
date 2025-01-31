@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c2bjkp73pcdkr"]
+[gd_scene load_steps=22 format=3 uid="uid://c2bjkp73pcdkr"]
 
 [ext_resource type="Script" path="res://scenes/maps/main.gd" id="1_e7vnp"]
 [ext_resource type="Texture2D" uid="uid://clb5byrsj7ye8" path="res://resource/map/map3.png" id="2_xpte1"]
@@ -7,11 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://ckir6u1c1v46w" path="res://scenes/utils/EnemySpawner.tscn" id="4_giy5d"]
 [ext_resource type="Texture2D" uid="uid://cb33od821usim" path="res://scenes/ui/hud/IMG_0076.png" id="5_3icwf"]
 [ext_resource type="Script" path="res://scenes/maps/hud_overlay.gd" id="5_fs1tj"]
-[ext_resource type="Script" path="res://scenes/maps/experience_todo.gd" id="6_2pxxg"]
 [ext_resource type="PackedScene" uid="uid://d0o2mwqlwtfgc" path="res://scenes/ui/hud/hud_main.tscn" id="6_g2vry"]
 [ext_resource type="PackedScene" uid="uid://5y1x0jkfpa6r" path="res://scenes/maps/pois/KeyHalf.tscn" id="7_83mnq"]
+[ext_resource type="Script" path="res://scenes/ui/hud/experience_bar.gd" id="7_nxcxx"]
 [ext_resource type="PackedScene" uid="uid://bfg2n1361d0kw" path="res://scenes/enemies/slime/BlueSlime.tscn" id="9_i5iwt"]
-[ext_resource type="PackedScene" uid="uid://ct2rxkgn055lv" path="res://scenes/maps/pois/Key.tscn" id="10_wuk8i"]
+[ext_resource type="PackedScene" uid="uid://vhjco0eclddd" path="res://scenes/maps/RoomHeart/RoomHeart.tscn" id="9_j4fmd"]
+[ext_resource type="PackedScene" uid="uid://b1d5meiymrqgh" path="res://scenes/maps/RoomStomach/RoomStomatch.tscn" id="10_h1pcw"]
+[ext_resource type="Script" path="res://scenes/maps/premade_slime_container.gd" id="10_ucvct"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrkbm"]
 size = Vector2(1291, 65)
@@ -71,11 +73,14 @@ mouse_filter = 0
 texture = ExtResource("5_3icwf")
 metadata/_edit_use_anchors_ = true
 
-[node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer"]
+[node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("player_experience")]
 offset_left = -182.0
 offset_top = 205.0
 offset_right = 118.0
 offset_bottom = 232.0
+show_percentage = false
+script = ExtResource("7_nxcxx")
+player_experience = NodePath("../../Player/Parameters/Experience")
 
 [node name="Walls" type="Node" parent="."]
 
@@ -113,7 +118,7 @@ scale = Vector2(1290, 67)
 texture = SubResource("PlaceholderTexture2D_qnfex")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -5.0
+volume_db = -10.0
 bus = &"Music"
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -132,6 +137,7 @@ collision_mask = 2
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/MainRegion"]
+visible = false
 position = Vector2(50, 60)
 scale = Vector2(14.1738, 35.0974)
 shape = SubResource("RectangleShape2D_bu05y")
@@ -142,6 +148,7 @@ collision_mask = 2
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/HeartRegion"]
+visible = false
 position = Vector2(-8.5, 833)
 scale = Vector2(8.48, 11.8)
 shape = SubResource("RectangleShape2D_efaww")
@@ -152,6 +159,7 @@ collision_mask = 2
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/LungRegion"]
+visible = false
 position = Vector2(-1092, 300)
 shape = SubResource("RectangleShape2D_olrja")
 
@@ -161,6 +169,7 @@ collision_mask = 2
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/StomatchRegion"]
+visible = false
 position = Vector2(1152, 251)
 shape = SubResource("RectangleShape2D_mnktl")
 
@@ -170,25 +179,11 @@ collision_mask = 2
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RegionNotifiers/BrainRegion"]
+visible = false
 position = Vector2(58.5, -814)
 shape = SubResource("RectangleShape2D_2pfs5")
 
 [node name="RoomPOIs" type="Node" parent="."]
-
-[node name="RoomHeart" type="Node" parent="RoomPOIs"]
-
-[node name="KeyRed" parent="RoomPOIs/RoomHeart" instance=ExtResource("10_wuk8i")]
-position = Vector2(1, 952)
-collision_layer = 128
-collision_mask = 2
-
-[node name="RoomStomach" type="Node" parent="RoomPOIs"]
-
-[node name="KeyBlue" parent="RoomPOIs/RoomStomach" instance=ExtResource("10_wuk8i")]
-position = Vector2(971, 708)
-collision_layer = 128
-collision_mask = 2
-key_selection = 1
 
 [node name="RoomLung" type="Node" parent="RoomPOIs"]
 
@@ -203,12 +198,163 @@ collision_layer = 128
 collision_mask = 2
 half_selection = 1
 
-[node name="Player" parent="." groups=["player"] instance=ExtResource("3_lx56x")]
-collision_mask = 1
-metadata/_edit_lock_ = true
+[node name="Rooms" type="Node" parent="."]
 
-[node name="Experience-todo" parent="Player/Parameters" index="1"]
-script = ExtResource("6_2pxxg")
+[node name="RoomHeart" parent="Rooms" instance=ExtResource("9_j4fmd")]
+position = Vector2(0, 966)
+
+[node name="HeartPiece1" parent="Rooms/RoomHeart" index="1"]
+position = Vector2(-301, -209)
+
+[node name="Sprite2D" parent="Rooms/RoomHeart/HeartPiece1" index="0"]
+scale = Vector2(2, 2)
+
+[node name="CollisionPolygon2D" parent="Rooms/RoomHeart/HeartPiece1" index="1"]
+scale = Vector2(2, 2)
+
+[node name="HeartPiece2" parent="Rooms/RoomHeart" index="2"]
+position = Vector2(340, -339)
+
+[node name="Sprite2D" parent="Rooms/RoomHeart/HeartPiece2" index="0"]
+scale = Vector2(2, 2)
+
+[node name="CollisionPolygon2D" parent="Rooms/RoomHeart/HeartPiece2" index="1"]
+scale = Vector2(2, 2)
+
+[node name="HeartPiece3" parent="Rooms/RoomHeart" index="3"]
+position = Vector2(53, 178)
+
+[node name="Sprite2D" parent="Rooms/RoomHeart/HeartPiece3" index="0"]
+scale = Vector2(2, 2)
+
+[node name="CollisionPolygon2D" parent="Rooms/RoomHeart/HeartPiece3" index="1"]
+scale = Vector2(2, 2)
+
+[node name="KeyRed" parent="Rooms/RoomHeart" index="4"]
+collision_layer = 128
+collision_mask = 2
+
+[node name="RoomStomatch" parent="Rooms" instance=ExtResource("10_h1pcw")]
+position = Vector2(1184, 265)
+
+[node name="Walls" parent="Rooms/RoomStomatch" index="0"]
+collision_mask = 46
+
+[node name="BlueKey" parent="Rooms/RoomStomatch" index="2"]
+collision_mask = 2
+
+[node name="slimes" parent="Rooms/RoomStomatch" index="3" node_paths=PackedStringArray("player_ref")]
+script = ExtResource("10_ucvct")
+player_ref = NodePath("../../../Player")
+
+[node name="BlueSlime" parent="Rooms/RoomStomatch/slimes" index="0"]
+collision_layer = 32
+collision_mask = 3
+sleeping = false
+
+[node name="BlueSlime2" parent="Rooms/RoomStomatch/slimes" index="1"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime3" parent="Rooms/RoomStomatch/slimes" index="2"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime4" parent="Rooms/RoomStomatch/slimes" index="3"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime5" parent="Rooms/RoomStomatch/slimes" index="4"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime6" parent="Rooms/RoomStomatch/slimes" index="5"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime7" parent="Rooms/RoomStomatch/slimes" index="6"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime8" parent="Rooms/RoomStomatch/slimes" index="7"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime9" parent="Rooms/RoomStomatch/slimes" index="8"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime10" parent="Rooms/RoomStomatch/slimes" index="9"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime11" parent="Rooms/RoomStomatch/slimes" index="10"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime12" parent="Rooms/RoomStomatch/slimes" index="11"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime13" parent="Rooms/RoomStomatch/slimes" index="12"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime14" parent="Rooms/RoomStomatch/slimes" index="13"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime15" parent="Rooms/RoomStomatch/slimes" index="14"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime16" parent="Rooms/RoomStomatch/slimes" index="15"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime17" parent="Rooms/RoomStomatch/slimes" index="16"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime18" parent="Rooms/RoomStomatch/slimes" index="17"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime19" parent="Rooms/RoomStomatch/slimes" index="18"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime20" parent="Rooms/RoomStomatch/slimes" index="19"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime21" parent="Rooms/RoomStomatch/slimes" index="20"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime22" parent="Rooms/RoomStomatch/slimes" index="21"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime23" parent="Rooms/RoomStomatch/slimes" index="22"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime24" parent="Rooms/RoomStomatch/slimes" index="23"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime25" parent="Rooms/RoomStomatch/slimes" index="24"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="BlueSlime26" parent="Rooms/RoomStomatch/slimes" index="25"]
+collision_layer = 32
+collision_mask = 3
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("3_lx56x")]
+collision_mask = 0
+metadata/_edit_lock_ = true
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -222,11 +368,16 @@ camera = NodePath("../Camera2D")
 [connection signal="area_entered" from="RegionNotifiers/LungRegion" to="." method="_on_region_entered" binds= ["lung"]]
 [connection signal="area_entered" from="RegionNotifiers/StomatchRegion" to="." method="_on_region_entered" binds= ["stomach"]]
 [connection signal="area_entered" from="RegionNotifiers/BrainRegion" to="." method="_on_region_entered" binds= ["brain"]]
-[connection signal="picked_up_key" from="RoomPOIs/RoomHeart/KeyRed" to="." method="_on_key_pickup" binds= ["red"]]
-[connection signal="picked_up_key" from="RoomPOIs/RoomStomach/KeyBlue" to="." method="_on_key_pickup" binds= ["blue"]]
 [connection signal="picked_up_key" from="RoomPOIs/RoomLung/KeyGreenLeft" to="." method="_on_key_pickup" binds= ["green_left"]]
 [connection signal="picked_up_key" from="RoomPOIs/RoomLung/KeyGreenRight" to="." method="_on_key_pickup" binds= ["green_right"]]
+[connection signal="picked_up_key" from="Rooms/RoomHeart/KeyRed" to="." method="_on_key_pickup" binds= ["red"]]
+[connection signal="picked_up_key" from="Rooms/RoomStomatch/BlueKey" to="." method="_on_key_pickup" binds= ["blue"]]
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
+[connection signal="exp_level_up" from="Player/Parameters/Experience" to="." method="_on_level_up"]
+[connection signal="exp_level_up" from="Player/Parameters/Experience" to="CanvasLayer/ExperienceBar" method="_on_level_up"]
 
 [editable path="HudMain"]
+[editable path="Rooms/RoomHeart"]
+[editable path="Rooms/RoomHeart/KeyRed"]
+[editable path="Rooms/RoomStomatch"]
 [editable path="Player"]

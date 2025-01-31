@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjxnob781wks7"]
+
+[ext_resource type="Texture2D" uid="uid://b88b05eteluqc" path="res://resource/weapons/weapon_sheet.png" id="1_4ur2b"]
+[ext_resource type="Script" path="res://scenes/equipment/weapons/aoe/flail/flail_weapon.gd" id="1_ddiv3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njx2h"]
+atlas = ExtResource("1_4ur2b")
+region = Rect2(64, 5, 30, 15)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oyeqm"]
+radius = 5.0
+height = 16.0
+
+[node name="FlailWeapon" type="Node2D" groups=["aoe"]]
+script = ExtResource("1_ddiv3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_njx2h")
+offset = Vector2(-15, 0)
+
+[node name="CollisionShape2D" type="Area2D" parent="Sprite2D"]
+position = Vector2(15, 0)
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/CollisionShape2D"]
+position = Vector2(-39, 0)
+shape = SubResource("CapsuleShape2D_oyeqm")
+
+[connection signal="body_entered" from="Sprite2D/CollisionShape2D" to="." method="_on_collision_shape_2d_body_entered"]

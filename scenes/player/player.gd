@@ -5,7 +5,7 @@ class_name PlayerEntity
 signal player_died
 
 # TODO: make speed change with items
-var speed: int = 1000
+var speed: int = 200
 var prev_walking_direction: Vector2
 var walking_direction: Vector2
 var facing_direction: Vector2
@@ -81,7 +81,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
     damagePerSecond += body.get_dps()
   if body is KeyEntity:
     body.on_pickup()
-    pass
+  if body is Loot:
+    $Parameters/Experience.on_exp_gather(body.exp_val)
+    body.on_collected()
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
@@ -108,20 +110,25 @@ func _on_health_entity_health_depleted() -> void:
 
 #region Attack Subsystem -- refactorout later
 func _init_attack_subsystem():
-  var starting_weapon = weapon_base.instantiate() as WeaponBase
-  add_child(starting_weapon)
-  starting_weapon.level_up()
-  starting_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/mole/MoleProjectile.tscn"))
+  # var starting_weapon = weapon_base.instantiate() as WeaponBase
+  # add_child(starting_weapon)
+  # starting_weapon.level_up()
+  # starting_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/mole/MoleProjectile.tscn"))
 
-  var t = weapon_base.instantiate() as WeaponBase
-  add_child(t)
-  t.level_up()
-  t.initialize(self, load("res://scenes/equipment/weapons/aoe/scalpel/ScalpelWeapon.tscn"))
+  # var t = weapon_base.instantiate() as WeaponBase
+  # add_child(t)
+  # t.level_up()
+  # t.initialize(self, load("res://scenes/equipment/weapons/aoe/scalpel/ScalpelWeapon.tscn"))
 
-  var temp_weapon = weapon_base.instantiate() as WeaponBase
-  add_child(temp_weapon)
-  temp_weapon.level_up()
-  temp_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/needle/NeedleProjectile.tscn"))
+  # var temp_weapon = weapon_base.instantiate() as WeaponBase
+  # add_child(temp_weapon)
+  # temp_weapon.level_up()
+  # temp_weapon.initialize(self, load("res://scenes/equipment/weapons/guns/needle/NeedleProjectile.tscn"))
+
+  var temp_weapon2 = weapon_base.instantiate() as WeaponBase
+  add_child(temp_weapon2)
+  temp_weapon2.level_up()
+  temp_weapon2.initialize(self, load("res://scenes/equipment/weapons/aoe/flail/FlailWeapon.tscn"))
 
 
 func get_attack_multiplier() -> float:
@@ -130,3 +137,13 @@ func get_attack_multiplier() -> float:
 func get_player_stats() -> PlayerStats:
   return $Parameters/PlayerAttackStats
 #endregion
+
+func _on_pickup_circle_body_entered(body: Node2D) -> void:
+  if body is Loot:
+    body.init_pickup(self)
+
+func _on_upgrade_level_up(upgrade_name: String) -> void:
+  # get the resource associated with this upgrade name
+  # if weapon does not already exist, instantiate it
+  # otherwise, apply level up
+  pass
