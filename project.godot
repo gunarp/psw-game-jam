@@ -72,6 +72,7 @@ move_right={
 2d_physics/layer_6="enemies"
 2d_physics/layer_7="dead-enemies"
 2d_physics/layer_8="key"
+2d_physics/layer_9="pushable"
 
 [rendering]
 

@@ -5,7 +5,7 @@ class_name PlayerEntity
 signal player_died
 
 # TODO: make speed change with items
-var speed: int = 1000
+var speed: int = 200
 var prev_walking_direction: Vector2
 var walking_direction: Vector2
 var facing_direction: Vector2
