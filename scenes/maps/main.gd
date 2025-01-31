@@ -43,7 +43,6 @@ func _on_region_entered(_area: Area2D, entered_region: String) -> void:
 
   current_region = entered_region
   $AudioStreamPlayer.stream = tracks[current_region]
-  #TODO: PUT THIS BACK IN!!
   $AudioStreamPlayer.play()
 
   $EnemyFactory.change_mob_spawned(enemy_to_spawn[current_region])
