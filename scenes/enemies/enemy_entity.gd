@@ -38,7 +38,7 @@ var player: PlayerEntity
 var is_awake: bool = true
 
 const default_layer = 32
-const default_mask = 61
+const default_mask = 45
 
 
 func _ready() -> void:
@@ -99,11 +99,20 @@ func hit(_player_ref: PlayerEntity, attack_stats: WeaponBaseStats, attack_direct
   damage *= player_stats.attack_multiplier
 
   if (_apply_damage_is_dead(damage)):
+    spawn_exp(self.global_position)
     queue_free()
   else:
     var knockback: float = attack_stats.knockback
     knockback *= player_stats.knockback_multiplier
     _set_knockback(Vector2(1, 0).rotated(attack_direction) * knockback)
+
+
+func spawn_exp(mob_position: Vector2) -> void:
+  var newExp = load("res://scenes/utils/ExpDrop.tscn").instantiate()
+  #newExp.initialize() #can define later
+  newExp.lock_rotation = true
+  newExp.global_position = mob_position
+  get_tree().root.add_child(newExp)
 
 
 func get_dps() -> float:
