@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://5y1x0jkfpa6r"]
+
+[ext_resource type="Texture2D" uid="uid://kxdavae2lhs0" path="res://resource/map/keys_hex.png" id="1_mweem"]
+[ext_resource type="Script" path="res://scenes/maps/pois/key_half.gd" id="1_oa03q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j57e1"]
+atlas = ExtResource("1_mweem")
+region = Rect2(48, 0, 12, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0idro"]
+atlas = ExtResource("1_mweem")
+region = Rect2(60, 0, 12, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cplma"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j57e1")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0idro")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}]
+
+[node name="KeyHalf" type="CharacterBody2D"]
+script = ExtResource("1_oa03q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cplma")
+animation = &"left"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(6, 12, 0, 12, -6, 0, 0, -12, 6, -12)

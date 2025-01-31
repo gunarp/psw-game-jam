@@ -55,18 +55,15 @@ collision_mask = 41
 script = ExtResource("1_ic40i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(5, 5)
 scale = Vector2(0.625, 0.625)
 texture = SubResource("AtlasTexture_2axu7")
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(5, 5)
 shape = SubResource("CircleShape2D_ctsp3")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(5, 5)

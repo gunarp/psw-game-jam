@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 run/max_fps=10
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://scenes/ui/default_bus_layout.tres"
+
 [display]
 
 window/size/viewport_width=640
@@ -65,9 +69,10 @@ move_right={
 2d_physics/layer_2="player"
 2d_physics/layer_3="projectile-player"
 2d_physics/layer_4="projectile-enemy"
-2d_physics/layer_5="floor-items"
+2d_physics/layer_5="loot"
 2d_physics/layer_6="enemies"
 2d_physics/layer_7="dead-enemies"
+2d_physics/layer_8="key"
 
 [rendering]
 

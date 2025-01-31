@@ -8,4 +8,3 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	value = entity_health.health
-

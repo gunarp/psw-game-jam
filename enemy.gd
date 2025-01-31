@@ -5,9 +5,9 @@ extends Node
 var player: Node
 
 func _ready():
-	player = get_node("/main/Player")
+  player = get_node("/main/Player")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+  pass

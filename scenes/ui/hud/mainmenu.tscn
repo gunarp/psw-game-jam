@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c63judpt3suwf"]
+[gd_scene load_steps=6 format=3 uid="uid://c63judpt3suwf"]
 
 [ext_resource type="Script" path="res://scenes/ui/hud/mainmenu.gd" id="1_crmjl"]
 [ext_resource type="Texture2D" uid="uid://dnf2n11l6h8u" path="res://scenes/ui/main_menu_textless.png" id="2_qctod"]
+[ext_resource type="AudioStream" uid="uid://derq32l47slef" path="res://scenes/ui/button_clicked.ogg" id="3_cgm84"]
 [ext_resource type="AudioStream" uid="uid://b4sqjlytvd4ic" path="res://resource/music/menu_vaccine.ogg" id="3_umeid"]
 
 [sub_resource type="SystemFont" id="SystemFont_68afk"]
@@ -20,6 +21,13 @@ menu_music = ExtResource("3_umeid")
 stream = ExtResource("3_umeid")
 volume_db = -5.0
 autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="ButtonSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_cgm84")
+volume_db = -5.0
+bus = &"Sounds"
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -61,6 +69,10 @@ text = "Double Dose"
 [node name="PlayButton" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Play"
+
+[node name="SettingsButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
 
 [node name="QuitButton" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
