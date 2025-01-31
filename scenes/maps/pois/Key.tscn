@@ -1,15 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct2rxkgn055lv"]
+[gd_scene load_steps=6 format=3 uid="uid://ct2rxkgn055lv"]
 
+[ext_resource type="Script" path="res://scenes/maps/pois/key.gd" id="1_4sull"]
 [ext_resource type="Texture2D" uid="uid://kxdavae2lhs0" path="res://resource/map/keys_hex.png" id="1_l8ag1"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jx1ys"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8r5t2"]
+atlas = ExtResource("1_l8ag1")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gptmr"]
 atlas = ExtResource("1_l8ag1")
 region = Rect2(0, 0, 24, 24)
 
-[node name="Key" type="CharacterBody2D"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_8uulv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8r5t2")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gptmr")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_jx1ys")
+[node name="Key" type="CharacterBody2D"]
+script = ExtResource("1_4sull")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8uulv")
+animation = &"blue"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(12, 0, 6, 12, -6, 12, -12, 0, -6, -12, 6, -12)

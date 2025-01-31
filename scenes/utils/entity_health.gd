@@ -12,7 +12,7 @@ signal entity_health_depleted
 
 # This can also be used for healing
 func on_damaged(damage: float):
-	health = clamp(health - damage, min_health, max_health)
+  health = clamp(health - damage, min_health, max_health)
 
-	if health == min_health:
-		entity_health_depleted.emit()
+  if health == min_health:
+    entity_health_depleted.emit()
