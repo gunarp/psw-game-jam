@@ -9,11 +9,20 @@ enum SPAWN_SIDE {LEFT, RIGHT, TOP, BOTTOM}
 
 @onready var player: PlayerEntity = get_tree().get_first_node_in_group("player")
 @onready var space_state = player.get_world_2d().direct_space_state
+@onready var num_to_spawn: int = 1
 
 const margin_offset: Vector2 = Vector2(5, 5)
 
 func _ready() -> void:
+  enable()
+
+
+func enable() -> void:
   $SpawnTimer.start(spawn_timeout)
+
+
+func disable() -> void:
+  $SpawnTimer.stop()
 
 
 func change_mob_spawned(new_enemy: PackedScene) -> void:
@@ -25,8 +34,9 @@ func _on_spawn_timer_timeout() -> void:
   newEnemy.initialize(player, mob_scale)
   var spawn_position = _get_random_spawn_position()
   if (!spawn_position.is_empty()):
-    newEnemy.global_position = spawn_position[0]
-    get_tree().root.add_child(newEnemy)
+    for n in num_to_spawn:
+      newEnemy.global_position = spawn_position[0]
+      get_tree().root.add_child(newEnemy)
 
 
 # returning an array feels like a dumb hack lol

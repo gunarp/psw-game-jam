@@ -7,6 +7,7 @@ class_name HeartPiece
 var is_placed: bool
 var locked_position: Vector2
 
+
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
   if is_placed:
     self.position = locked_position

@@ -2,7 +2,6 @@ extends Node2D
 
 class_name RoomHeart
 
-
 var placed_pieces = {}
 var num_expected = 3
 

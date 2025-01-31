@@ -39,10 +39,27 @@ func _on_region_entered(_area: Area2D, entered_region: String) -> void:
   match entered_region:
     "brain":
       _set_door_state(true)
+    "stomach":
+      $EnemyFactory.disable()
+
+
+func _on_region_exited(_area:Area2D, exited_region:String) -> void:
+  match exited_region:
+    "stomach":
+      $EnemyFactory.spawn_timeout = 0.25
+      $EnemyFactory.num_to_spawn = 1
 
 
 func _on_key_pickup(key_name: String) -> void:
   obtained_keys[key_name] = true
+
+  # Add any region specific secret sauce here
+  match key_name:
+    "blue":
+      $EnemyFactory.enable()
+      $EnemyFactory.spawn_timeout = 0.10
+      $EnemyFactory.num_to_spawn = 3
+
   if (obtained_keys.size() == num_keys_to_obtain):
     print("bust down that wall!")
     _set_door_state(false)
