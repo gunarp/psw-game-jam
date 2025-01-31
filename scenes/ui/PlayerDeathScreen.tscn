@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://n1l17idufobi"]
+
+[ext_resource type="Texture2D" uid="uid://na28e4ydpaft" path="res://resource/map/death_screen.png" id="1_wrr77"]
+
+[node name="PlayerDeathScreen" type="TextureRect"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -240.0
+offset_right = 320.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wrr77")
