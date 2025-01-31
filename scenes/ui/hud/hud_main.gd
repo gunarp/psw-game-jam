@@ -8,8 +8,8 @@ extends CanvasLayer
 
 
 func _ready() -> void:
-	$HealthBar.set_position((get_viewport().get_visible_rect().size / 2) + (health_bar_offset * health_bar_scale))
-	$HealthBar.scale = health_bar_scale
+  $HealthBar.set_position((get_viewport().get_visible_rect().size / 2) + (health_bar_offset * health_bar_scale))
+  $HealthBar.scale = health_bar_scale
 
 func _process(_delta):
-	pass
+  pass
