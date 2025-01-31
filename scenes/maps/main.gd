@@ -58,6 +58,7 @@ func _on_region_exited(_area:Area2D, exited_region:String) -> void:
     "stomach":
       $EnemyFactory.spawn_timeout = 0.25
       $EnemyFactory.num_to_spawn = 1
+      $EnemyFactory.enable()
 
 
 func _on_key_pickup(key_name: String) -> void:
