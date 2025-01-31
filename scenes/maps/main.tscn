@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://vhjco0eclddd" path="res://scenes/maps/RoomHeart/RoomHeart.tscn" id="9_j4fmd"]
 [ext_resource type="PackedScene" uid="uid://b1d5meiymrqgh" path="res://scenes/maps/RoomStomach/RoomStomatch.tscn" id="10_h1pcw"]
 [ext_resource type="Script" path="res://scenes/maps/premade_slime_container.gd" id="10_ucvct"]
+[ext_resource type="PackedScene" uid="uid://n1l17idufobi" path="res://scenes/ui/PlayerDeathScreen.tscn" id="15_hmk0f"]
 [ext_resource type="PackedScene" uid="uid://dqvub3tqhj8ye" path="res://scenes/level_up_ui.tscn" id="13_g57gn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrkbm"]
@@ -371,6 +372,19 @@ remote_path = NodePath("../../Camera2D")
 [node name="EnemyFactory" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_giy5d")]
 mob_to_spawn = ExtResource("9_i5iwt")
 camera = NodePath("../Camera2D")
+
+[node name="PlayerDeathScreen" parent="." instance=ExtResource("15_hmk0f")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -240.0
+offset_right = 320.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="upgrade_selected" from="CanvasLayer/Control/LevelUpUI" to="Player" method="_on_upgrade_level_up"]
 [connection signal="area_entered" from="RegionNotifiers/MainRegion" to="." method="_on_region_entered" binds= ["main"]]
