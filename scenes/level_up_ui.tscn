@@ -1,0 +1,106 @@
+[gd_scene load_steps=14 format=3 uid="uid://dutom0jqfca0u"]
+
+[ext_resource type="Script" path="res://scenes/maps/level_up_ui.gd" id="1_klw3x"]
+[ext_resource type="Texture2D" uid="uid://dk6dxl0lqk70i" path="res://resource/player/augment_icons.png" id="2_v3f5o"]
+[ext_resource type="Texture2D" uid="uid://bi0lgekmtou7d" path="res://resource/weapons/weapons.png" id="3_2j0jo"]
+[ext_resource type="Texture2D" uid="uid://bqsgi1n0arg7t" path="res://resource/player/upgrade_ui.png" id="3_rcbrc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cb3we"]
+atlas = ExtResource("3_2j0jo")
+region = Rect2(2, 2, 17, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mnns"]
+atlas = ExtResource("3_2j0jo")
+region = Rect2(19, 1, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1diw"]
+atlas = ExtResource("3_2j0jo")
+region = Rect2(43, 2, 20, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lb86m"]
+atlas = ExtResource("3_2j0jo")
+region = Rect2(63, 0, 32, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbr4j"]
+atlas = ExtResource("2_v3f5o")
+region = Rect2(0, 0, 412, 626)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njvio"]
+atlas = ExtResource("2_v3f5o")
+region = Rect2(408, 0, 524, 718)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po3ew"]
+atlas = ExtResource("2_v3f5o")
+region = Rect2(917, 0, 472, 718)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxnwn"]
+atlas = ExtResource("2_v3f5o")
+region = Rect2(1385, 0, 387, 718)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjtsx"]
+atlas = ExtResource("2_v3f5o")
+region = Rect2(1771, 0, 452, 632)
+
+[node name="LevelUpUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_klw3x")
+option_icons = Array[Texture2D]([SubResource("AtlasTexture_cb3we"), SubResource("AtlasTexture_3mnns"), SubResource("AtlasTexture_s1diw"), SubResource("AtlasTexture_lb86m"), SubResource("AtlasTexture_wbr4j"), SubResource("AtlasTexture_njvio"), SubResource("AtlasTexture_po3ew"), SubResource("AtlasTexture_uxnwn"), SubResource("AtlasTexture_qjtsx")])
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 385.0
+offset_top = 242.0
+offset_right = 2945.0
+offset_bottom = 2162.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_rcbrc")
+
+[node name="IconContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Option1" type="Button" parent="IconContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="IconContainer/Option1"]
+layout_mode = 0
+offset_left = 531.0
+offset_top = 416.0
+offset_right = 571.0
+offset_bottom = 456.0
+expand_mode = 1
+
+[node name="Option2" type="Button" parent="IconContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="IconContainer/Option2"]
+layout_mode = 0
+offset_left = 611.0
+offset_top = 414.0
+offset_right = 651.0
+offset_bottom = 454.0
+expand_mode = 1
+
+[node name="Option3" type="Button" parent="IconContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="IconContainer/Option3"]
+layout_mode = 0
+offset_left = 685.0
+offset_top = 415.0
+offset_right = 725.0
+offset_bottom = 455.0
+expand_mode = 1
+
+[connection signal="pressed" from="IconContainer/Option1" to="." method="_on_option_1_pressed"]
+[connection signal="pressed" from="IconContainer/Option2" to="." method="_on_option_2_pressed"]
+[connection signal="pressed" from="IconContainer/Option3" to="." method="_on_option_3_pressed"]
