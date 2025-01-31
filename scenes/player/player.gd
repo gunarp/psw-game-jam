@@ -81,7 +81,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
     damagePerSecond += body.get_dps()
   if body is KeyEntity:
     body.on_pickup()
-    pass
+  if body is Loot:
+    $Parameters/Experience.on_exp_gather(body.exp_val)
+    body.on_collected()
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
@@ -132,7 +134,5 @@ func get_player_stats() -> PlayerStats:
 #endregion
 
 func _on_pickup_circle_body_entered(body: Node2D) -> void:
-  print("exp gathered!")
   if body is Loot:
-    $Parameters/Experience.on_exp_gather(body.exp_val)
-    body.on_player_collision()
+    body.init_pickup(self)

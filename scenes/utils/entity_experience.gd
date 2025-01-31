@@ -12,7 +12,7 @@ func on_exp_gather(exp_gain : int):
   print("incrementing exp gain")
   total_experience += exp_gain
   current_experience += exp_gain
-  
+
   # currently there is no changing the exp_per_level value
   # so the math below reflects that
   if (current_experience >= exp_per_level):

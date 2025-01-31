@@ -38,7 +38,7 @@ var player: PlayerEntity
 var is_awake: bool = true
 
 const default_layer = 32
-const default_mask = 61
+const default_mask = 45
 
 
 func _ready() -> void:
@@ -110,8 +110,6 @@ func hit(_player_ref: PlayerEntity, attack_stats: WeaponBaseStats, attack_direct
 func spawn_exp(mob_position: Vector2) -> void:
   var newExp = load("res://scenes/utils/ExpDrop.tscn").instantiate()
   #newExp.initialize() #can define later
-  newExp.freeze = true
-  newExp.freeze_mode = 0
   newExp.lock_rotation = true
   newExp.global_position = mob_position
   get_tree().root.add_child(newExp)

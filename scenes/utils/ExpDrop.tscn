@@ -1,20 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://dp3ca6t8aqoe1"]
+[gd_scene load_steps=4 format=3 uid="uid://cca8phbqbbt0y"]
 
 [ext_resource type="Script" path="res://scenes/utils/loot.gd" id="1_3yl4h"]
 [ext_resource type="Texture2D" uid="uid://dsgon62ltc1f2" path="res://resource/player/exp_purp.png" id="2_wxmf4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ortxm"]
-radius = 2.0
+radius = 6.0
 
 [node name="ExpDrop" type="RigidBody2D"]
 collision_layer = 16
 collision_mask = 0
 gravity_scale = 0.0
+can_sleep = false
+lock_rotation = true
 script = ExtResource("1_3yl4h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_wxmf4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_ortxm")
